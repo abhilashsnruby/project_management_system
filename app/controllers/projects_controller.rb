@@ -35,6 +35,11 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def assign_tasks
+    @projects = Project.all
+
+  end
+
   private
 
   def find_project

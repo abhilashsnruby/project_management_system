@@ -10,4 +10,7 @@
   Project.create(title: "project_#{num}", description: "#{num} deals with payroll", category_name: "social_#{num}")
 end
 
+5.times do |num|
+  Task.create(task_name: "task_#{num}", project_id: num)
+end
 

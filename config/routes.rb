@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :tasks
-  resources :projects
+  resources :projects, except: [:show] do
+    get 'assign_tasks', on: :collection
+  end
   
   root to: "projects#index"
 
