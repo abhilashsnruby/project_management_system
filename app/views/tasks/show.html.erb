@@ -7,7 +7,7 @@
 
 <p>
   <strong>Project:</strong>
-  <%= @task.project_id %>
+  <%= @task.project.title %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

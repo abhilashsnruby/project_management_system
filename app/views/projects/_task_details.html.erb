@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @project.title %>
+</p>
+
+<p>
+  <strong>Tasks:</strong>
+  <% @project.tasks.each do |task| %>
+    <li> <%= task.task_name %> </li>
+  <% end %>
+</p>
+
+<%= link_to 'Back', projects_path %>

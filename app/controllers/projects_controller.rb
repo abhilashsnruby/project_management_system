@@ -28,16 +28,25 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def assign_tasks
     @projects = Project.all
+    @tasks = Task.all
+    @project = params[:project].present? ? Project.find(params[:project]) : ''
+    Project.assign_tasks_to_project(params) if params.present?
+    if @project.present?
+      render partial: 'task_details', project: @project, notice: "successfully tasks assigend to project"
+    else
+      render layout: nil
+    end
+  end
 
+  def project_tasks
+    @projects = Project.all
   end
 
   private

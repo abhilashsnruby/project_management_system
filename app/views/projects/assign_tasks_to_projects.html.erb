@@ -1,8 +1,0 @@
-<%= form_tag(assign_tasks_projects_path, {:method => :get}) do %>
-  
-  <div class = 'project'>
-    <label> Projects </label>
-    <%= select_tag "project", options_from_collection_for_select(@projects, "id", "title")%>
-  </div>
-
-<% end %>

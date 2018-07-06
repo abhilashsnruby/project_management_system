@@ -1,0 +1,23 @@
+
+<div>
+  <%= form_tag(assign_tasks_projects_path, {:method => :get}) do %>
+    
+    <div class = 'projects'>
+      <label> Projects </label><br />
+      <%= select_tag "project", options_from_collection_for_select(@projects, "id", "title"), prompt: 'select a project'%>
+    </div>
+
+    <p>
+      <label> Tasks </label><br />
+      <% for task in @tasks %>
+        <%= check_box_tag "task[]", task.id %>
+        <%= task.task_name %><br />
+      <% end %>
+    </p>
+
+    <p>
+      <%= submit_tag "submit"%>
+    </p>
+
+  <% end %>
+</div>
