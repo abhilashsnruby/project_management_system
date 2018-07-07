@@ -36,8 +36,9 @@ class ProjectsController < ApplicationController
   def assign_tasks
     @projects = Project.all
     @tasks = Task.all
-    @project = params[:project].present? ? Project.find(params[:project]) : ''
-    Project.assign_tasks_to_project(params) if params.present?
+    project = params[:project].present?
+    @project = project ? Project.find(params[:project]) : ''
+    Project.assign_tasks_to_project(params) if project
     if @project.present?
       render partial: 'task_details', project: @project, notice: "successfully tasks assigend to project"
     else
@@ -56,6 +57,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :category_name)
+    params.require(:project).permit(:title, :description, :category_name, :priority)
   end
 end

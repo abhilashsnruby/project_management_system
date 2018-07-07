@@ -1,0 +1,12 @@
+<div>
+  <p>
+    <strong > Projects: </strong>
+    <% @projects.each do |project| %>
+      <p style = 'color:red;font-size: 150%'><%= project.title %></p>
+      <% project.tasks.each do |task| %>
+        <li style = 'color:green'><%= task.task_name %></li>
+      <% end %>
+    <% end %>
+  </p>
+</div>
+<%= link_to 'Back', projects_path %>

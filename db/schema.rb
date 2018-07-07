@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180705120734) do
+ActiveRecord::Schema.define(version: 20180707044548) do
 
   create_table "projects", force: :cascade do |t|
     t.string "title"
@@ -21,12 +21,8 @@ ActiveRecord::Schema.define(version: 20180705120734) do
     t.integer "user_id"
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.string "task_name"
-    t.integer "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+# Could not dump table "tasks" because of following StandardError
+#   Unknown type 'deadline' for column 'string'
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
