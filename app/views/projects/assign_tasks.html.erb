@@ -3,21 +3,28 @@
   <%= form_tag(assign_tasks_projects_path, {:method => :get}) do %>
     
     <div class = 'projects'>
-      <label> Projects </label>
+      <!-- <label style = 'color:red;font-size: 150%'> Projects </label> -->
       <%= select_tag "project", options_from_collection_for_select(@projects, "id", "title"), prompt: 'select a project'%>
     </div>
 
     <p>
-      <label style = 'color:red;font-size: 150%'> Tasks </label><br />
+<!--       <label style = 'color:red;font-size: 150%'> Tasks </label><br /><br />
+ -->      
       <% @tasks.each_with_index do |task, index| %>
         <%= check_box_tag "task[]", task.id %>
         <strong> <%= task.task_name %> </strong> <br />
+        
         <p>
           <%= radio_button_tag "priority_#{index}", {"#{task.id}" => 'high'} %>
           <label style = 'color:green;font-size: 80%'> High Priority </label>
           <%= radio_button_tag "priority_#{index}", {"#{task.id}" => 'Low'} %>
           <label style = 'color:green;font-size: 80%'> Low Priority </label>
         </p>
+        
+        <div class = 'deadline'>
+          <%= select_tag "deadline_#{index}", options_for_select(task_deadline, "#{task.id}"), prompt: 'select task deadline'%>
+        </div> </br>
+      
       <% end %>
     </p>
 
