@@ -11,8 +11,9 @@
 <!--       <label style = 'color:red;font-size: 150%'> Tasks </label><br /><br />
  -->      
       <% @tasks.each_with_index do |task, index| %>
+        
         <%= check_box_tag "task[]", task.id %>
-        <strong> <%= task.task_name %> </strong> <br />
+        <strong style = 'color:red;'> <%= task.task_name %> </strong> <br />
         
         <p>
           <%= radio_button_tag "priority_#{index}", {"#{task.id}" => 'high'} %>
@@ -20,11 +21,19 @@
           <%= radio_button_tag "priority_#{index}", {"#{task.id}" => 'Low'} %>
           <label style = 'color:green;font-size: 80%'> Low Priority </label>
         </p>
+
+        <p>
+          <%= radio_button_tag "status_#{index}", {"#{task.id}" => 'completed'} %>
+          <label style = 'color:green;font-size: 80%'> Completed </label>
+          <%= radio_button_tag "status_#{index}", {"#{task.id}" => 'not completed'} %>
+          <label style = 'color:green;font-size: 80%'> Not Completed </label>
+        </p>
         
         <div class = 'deadline'>
           <%= select_tag "deadline_#{index}", options_for_select(task_deadline, "#{task.id}"), prompt: 'select task deadline'%>
-        </div> </br>
-      
+        </div> 
+        </br> </br> </br>
+
       <% end %>
     </p>
 

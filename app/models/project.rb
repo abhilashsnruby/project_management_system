@@ -3,14 +3,18 @@ class Project < ApplicationRecord
   belongs_to :user
 
   def self.assign_tasks_to_project(params)
-    tasks, priorities, deadlines = Task.find_task_details(params)
-    priorities.each do |priority|
-      deadlines.each do |deadline|
-        tasks.each do |task|
-          task.project_id = params[:project]
-          task.priority = priority
-          task.deadline = deadline
-          task.save
+    tasks, priorities, deadlines, status = Task.find_task_details(params)
+    binding.pry
+    tasks.each do |task|
+      priorities.each do |priority|
+        deadlines.each do |deadline|
+          status.each do |status|
+            task.project_id = params[:project]
+            task.priority = priority
+            task.deadline = deadline
+            task.status = status
+            task.save
+          end
         end
       end
     end
