@@ -14,12 +14,12 @@ class Task < ApplicationRecord
   end
 
   def self.fetch_priority_status_values(task_params)
-    deadline_values = []
+    priority_values = []
     priorities = task_params.select{ |k, v| k.include?("priority") }
     priorities.each do |key, value|
-      deadline_values << eval(value)
+      priority_values << eval(value)
     end
-    deadline_values.flatten
+    priority_values.flatten
   end
 
   def self.fetch_status_values(task_params)
@@ -49,5 +49,41 @@ class Task < ApplicationRecord
     task_params = retrive_parmas_keys(params)
     deadline = task_params.select{ |k, v| k.include?("deadline") }.values.flatten
     deadline.reject(&:empty?)
+  end
+
+  def self.save_task_priority_details(tasks, priorities, *args)
+    index = 0
+    tasks.each do |task|
+      if tasks.count == priorities.count
+        task.project_id = args[0][:project].to_i
+        task.priority = priorities[index]
+        task.save
+        index += 1
+      end
+    end
+  end
+
+  def self.save_task_deadlines_details(tasks, deadlines, *args)
+    index = 0
+    tasks.each do |task|
+      if tasks.count == deadlines.count
+        task.project_id = args[0][:project].to_i
+        task.deadline = deadlines[index]
+        task.save
+        index += 1
+      end
+    end
+  end
+
+  def self.save_task_status_details(tasks, status, *args)
+    index = 0
+    tasks.each do |task|
+      if tasks.count == status.count
+        task.project_id = args[0][:project].to_i
+        task.status = status[index]
+        task.save
+        index += 1
+      end
+    end
   end
 end

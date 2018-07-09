@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 10.times do |num|
-  Project.create(title: "project_#{num}", description: "#{num} deals with payroll", category_name: "social_#{num}")
+  Project.create(title: "project_#{num}", description: "#{num} deals with payroll", category_name: "social_#{num}", user_id: 1)
 end
 
 5.times do |num|

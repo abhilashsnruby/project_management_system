@@ -4,20 +4,9 @@ class Project < ApplicationRecord
 
   def self.assign_tasks_to_project(params)
     tasks, priorities, deadlines, status = Task.find_task_details(params)
-    binding.pry
-    tasks.each do |task|
-      priorities.each do |priority|
-        deadlines.each do |deadline|
-          status.each do |status|
-            task.project_id = params[:project]
-            task.priority = priority
-            task.deadline = deadline
-            task.status = status
-            task.save
-          end
-        end
-      end
-    end
+    Task.save_task_priority_details(tasks, priorities, params)
+    Task.save_task_deadlines_details(tasks, deadlines, params)
+    Task.save_task_status_details(tasks, status, params)
   end
 
 end

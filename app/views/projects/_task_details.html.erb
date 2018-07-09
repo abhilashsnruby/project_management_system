@@ -1,15 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @project.title %>
+  <strong> <%= @project.title.capitalize %> </strong>
 </p>
 
 <p>
-  <strong>Tasks:</strong>
+  <strong style = 'color:red;'>Tasks:</strong>
   <% @project.tasks.each do |task| %>
-    <li> <%= task.task_name %> </li>
+    <ul style="list-style-type:none">
+     <li> <label style = 'color:green;'> Task Name: </label> <%= task.task_name %> </li>
+     <li> <label style = 'color:green;'> Priority: </label> <%= task.priority %> </li>
+     <li> <label style = 'color:green;'> Status: </label> <%= task.status %> </li>
+    </ul>
   <% end %>
-</p>
+</p> <br/>
 
 <%= link_to 'Back', projects_path %>

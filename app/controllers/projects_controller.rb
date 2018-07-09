@@ -34,7 +34,6 @@ class ProjectsController < ApplicationController
   end
 
   def assign_tasks
-    
     @projects = Project.all
     @tasks = Task.all
     project = params[:project].present?
