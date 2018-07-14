@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :project
+  has_many :tasks
 
   def self.find_task_details(params)
     priority_val, status_val, priorities, deadlines, status = [], [], [], [], []

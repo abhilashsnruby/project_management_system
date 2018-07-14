@@ -1,9 +1,17 @@
-<script type = 'text/javascript'>
-  function validateFormElements(formname){
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type = 'text/javascript'>
+    $(document).ready(function() {
+      var elements = document.getElementsByName("task[]");
+      for(var i=0; i < elements.length; i++){
+        comment = (`#comment_${i}`);
+        $(comment).show();
+      }
+    });
+
+  function validateFormElements(){
     var e = document.getElementById("project");
     var elements = document.getElementsByName("task[]");
     var checked=false;
-    var flag = 4;
     var optionSelIndex = e.options[e.selectedIndex].value;
     var optionSelectedText = e.options[e.selectedIndex].text;
     var optionSelIndex = e.options[e.selectedIndex].value;
@@ -50,49 +58,53 @@
 
 </script>
 
-<center>
 <div>
-  <%= form_tag(assign_tasks_projects_path, :id => "project_tasks", :name => "searchForm", :onsubmit=>"return validateFormElements('searchForm');", :method => :get) do %>
-    
-    <div class = 'projects'>
-      <!-- <label style = 'color:red;font-size: 150%'> Projects </label> -->
-      <%= select_tag "project", options_from_collection_for_select(@projects, "id", "title"), prompt: 'select a project'%>
-    </div>
+<%= form_tag(assign_tasks_projects_path, :id => "project_tasks", :name => "searchForm", :onsubmit=>"return validateFormElements();", :method => :get) do %>
+  
+  <div class = 'projects'>
+    <!-- <label style = 'color:red;font-size: 150%'> Projects </label> -->
+    <%= select_tag "project", options_from_collection_for_select(@projects, "id", "title"), prompt: 'select a project'%>
+  </div>
 
-    <p>
+  <p>
 <!--       <label style = 'color:red;font-size: 150%'> Tasks </label><br /><br />
- -->      
-      <% @tasks.each_with_index do |task, index| %>
-        
-        <%= check_box_tag "task[]", task.id %>
-        <strong style = 'color:red;'> <%= task.task_name %> </strong> <br />
-        
-        <p>
-          <%= radio_button_tag "priority_#{index}", {"#{task.id}" => 'high'} %>
-          <label style = 'color:green;font-size: 80%'> High Priority </label>
-          <%= radio_button_tag "priority_#{index}", {"#{task.id}" => 'Low'} %>
-          <label style = 'color:green;font-size: 80%'> Low Priority </label>
-        </p>
-
-        <p>
-          <%= radio_button_tag "status_#{index}", {"#{task.id}" => 'completed'} %>
-          <label style = 'color:green;font-size: 80%'> Completed </label>
-          <%= radio_button_tag "status_#{index}", {"#{task.id}" => 'not completed'} %>
-          <label style = 'color:green;font-size: 80%'> Not Completed </label>
-        </p>
-        
-        <div class = 'deadline'>
-          <%= select_tag "deadline_#{index}", options_for_select(task_deadline, "#{task.id}"), prompt: 'select task deadline'%>
-        </div> 
-        </br> </br> </br>
-
-      <% end %>
+-->      
+  <% @tasks.each_with_index do |task, index| %>
+            
+    <%= check_box_tag "task[]", task.id %>
+    <strong style = 'color:red;'> <%= task.task_name %> </strong> <br />
+    
+    <p>
+      <%= radio_button_tag "priority_#{index}", {"#{task.id}" => 'high'}%>
+      <label style = 'color:green;font-size: 80%'> High Priority </label>
+      <%= radio_button_tag "priority_#{index}", {"#{task.id}" => 'Low'} %>
+      <label style = 'color:green;font-size: 80%'> Low Priority </label>
     </p>
 
     <p>
-      <%= submit_tag "submit"%>
+      <%= radio_button_tag "status_#{index}", {"#{task.id}" => 'completed'} %>
+      <label style = 'color:green;font-size: 80%'> Completed </label>
+      <%= radio_button_tag "status_#{index}", {"#{task.id}" => 'not completed'} %>
+      <label style = 'color:green;font-size: 80%'> Not Completed </label>
     </p>
+    
+    <div class = 'deadline'>
+      <%= select_tag "deadline_#{index}", options_for_select(task_deadline, "#{task.id}"), prompt: 'select task deadline'%>
+    </div></br>
+
+    <div id="target_<%= index %>"></div>
+
+    <!-- <div>
+      <% @index = index %>
+      <%= render partial: 'tasks/add_comments', :index => @index %>
+    </div> </br> </br> -->
 
   <% end %>
+  </p>
+
+  <p>
+    <%= submit_tag "submit"%>
+  </p>
+
+<% end %>
 </div>
-</center>

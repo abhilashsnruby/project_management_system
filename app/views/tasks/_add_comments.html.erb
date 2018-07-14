@@ -1,0 +1,4 @@
+<% index = @index %>
+<div class = "task_comments_<%= index %>">
+  <%= text_area_tag "comment_#{index}", nil, :id => "comment_#{index}", class: 'comment_input' %>
+</div></br>
