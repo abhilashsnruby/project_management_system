@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+  <% @comment.each do |comment| %>
+    <p>
+      <strong> <%=comment.comment_name%> </strong>     
+    </p>
+
+    <p>
+      <%= comment.comment_text %>
+    </p>
+
+    <small>
+      <%= commented_hours_ago(comment) %> 
+    </small>
+    
+    <hr>
+
+  <% end %>
+</div>

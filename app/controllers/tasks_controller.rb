@@ -61,10 +61,37 @@ class TasksController < ApplicationController
     end
   end
 
+  def display_task_details
+    @tasks = Task.all
+  end
+
+  def task_comment_page
+    task_id = params[:task_id]
+    comment_name = params['comment_name']
+    description = params['comment_description']
+    if task_comment_condition(params)
+      @comment = Comment.assign_comments_to_task(task_id, comment_name, description)
+      @comment.present? ? @comment : (success == true)
+    else
+      @comment = Comment.find_comment(task_id)
+      success = false
+    end
+    if success == true
+      render "task_comment_page", comment: @comment, notice: "comment was assigned successfully"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def task_comment_condition(params)
+      (params[:task_id].present? &&
+       params[:comment_name].present? &&
+       params[:comment_name].present? &&
+       params[:commit].present?)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

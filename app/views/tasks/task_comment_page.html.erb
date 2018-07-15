@@ -1,0 +1,25 @@
+<div>
+  <%= form_tag(task_comment_page_tasks_path, :id => "comment_tasks", :name => "searchForm", :method => :get) do %>
+    
+    <%= hidden_field_tag 'task_id', params[:task_id] %>
+
+    <div class = 'comment_name'>
+      <%= text_field_tag "comment_name", nil, placeholder: 'Enter comment name', prompt: 'select a project'%>
+    </div><br/>
+
+    <div class = 'comment_desc'>
+      <%= text_area_tag "comment_description", nil, placeholder: 'Enter description', prompt: 'select a project'%>
+    </div>
+
+    <p>
+      <%= submit_tag "submit"%>
+    </p>
+
+  <% end %>
+</div>
+
+<% if params[:commit] == 'submit'%>
+  <div>
+    <%= render partial: 'display_comments', comment: @comment %>
+  <div>
+<% end %>
