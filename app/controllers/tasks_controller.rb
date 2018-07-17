@@ -71,7 +71,7 @@ class TasksController < ApplicationController
         @comment = Comment.find(params[:comment_id])
         @comment.update_attributes!(comment_name: params[:comment_name],
                                    comment_text: params[:comment_text], 
-                                   task_id: params[:task_id])
+                                   task_id: params[:task_id], created_date_record: Comment.retrive_present_time)
         @comment = Comment.find_comments(params[:task_id])
         success = true
       else
