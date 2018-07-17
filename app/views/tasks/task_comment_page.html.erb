@@ -1,25 +1,74 @@
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type = 'text/javascript'>
+  
+  </script>
+
+<% if params[:commit] != 'update' %>
+  <% if params[:comment_id].present? %>
+    <% if (@comment.id).present? %>
+      <% comment_id = @comment.id %>
+      <% comment_name = @comment.comment_name %>
+      <% comment_text = @comment.comment_text %>
+      <% @comment = Comment.where(task_id: @comment.task_id) %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <div>
   <%= form_tag(task_comment_page_tasks_path, :id => "comment_tasks", :name => "searchForm", :method => :get) do %>
-    
-    <%= hidden_field_tag 'task_id', params[:task_id] %>
 
-    <div class = 'comment_name'>
-      <%= text_field_tag "comment_name", nil, placeholder: 'Enter comment name', prompt: 'select a project'%>
-    </div><br/>
+    <%= hidden_field_tag 'task_id', (params[:comment_id].present? ? Comment.find(params[:comment_id]).task_id : params[:task_id]) %>
 
-    <div class = 'comment_desc'>
-      <%= text_area_tag "comment_description", nil, placeholder: 'Enter description', prompt: 'select a project'%>
-    </div>
+    <% if comment_id.present? %>
+      
+      <div class = 'comment_name'>
+        <% if comment_name.present? %>
+          <%= text_field_tag "comment_name", "#{comment_name}" %>
+        <% else %>
+          <%= text_field_tag "comment_name", nil, placeholder: 'Enter comment name'%>
+        <% end %>
+      </div><br/>
 
-    <p>
-      <%= submit_tag "submit"%>
-    </p>
+      <div class = 'comment_desc'>
+        <% if comment_text.present? %>
+          <%= text_area_tag "comment_text", "#{comment_text}"%>
+        <% else %>
+          <%= text_area_tag "comment_text", nil, placeholder: 'Enter description'%>
+        <% end %>
+      </div><br/>
+
+      <p>
+        <%= submit_tag "update", id: 'update_form'%>
+        <%= hidden_field_tag 'comment_id', params[:comment_id] %>
+      </p>
+
+    <% else %>
+      
+      <div class = 'comment_name'>
+        <%= text_field_tag "comment_name", nil, placeholder: 'Enter comment name'%>
+      </div><br/>
+
+      <div class = 'comment_desc'>
+        <%= text_area_tag "comment_description", nil, placeholder: 'Enter description'%>
+      </div>
+
+      <p>
+        <%= submit_tag "submit", id: 'submit_form'%>
+      </p>
+
+    <% end %>
 
   <% end %>
 </div>
 
-<% if params[:commit] == 'submit'%>
-  <div>
-    <%= render partial: 'display_comments', comment: @comment %>
-  <div>
+<% if params[:commit] == 'submit' || params[:task_id].present? || comment_id.present? %>
+  <% if comment_id.present? %>
+    <div>
+      <%= render partial: 'display_comments', comment: @comment %>
+    <div>
+  <% else %>
+    <div>
+      <%= render partial: 'display_edit_comments', comment: @comment %>
+    <div>
+  <% end %>
 <% end %>

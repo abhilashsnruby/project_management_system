@@ -66,16 +66,35 @@ class TasksController < ApplicationController
   end
 
   def task_comment_page
+    if params[:comment_id].present?
+      if params[:commit] == 'update'
+        @comment = Comment.find(params[:comment_id])
+        @comment.update_attributes!(comment_name: params[:comment_name],
+                                   comment_text: params[:comment_text], 
+                                   task_id: params[:task_id])
+        @comment = Comment.find_comments(params[:task_id])
+        success = true
+      else
+        @comment = Comment.find(params[:comment_id])
+        success = true
+      end
+    end
+
     task_id = params[:task_id]
     comment_name = params['comment_name']
     description = params['comment_description']
-    if task_comment_condition(params)
+    if task_id_condition(params)
+      if !params[:comment_id].present?
+        @comment = Comment.find_comments(task_id)
+        success = true
+      end
+    elsif task_comment_condition(params)
       @comment = Comment.assign_comments_to_task(task_id, comment_name, description)
-      @comment.present? ? @comment : (success == true)
+      success == true
     else
-      @comment = Comment.find_comment(task_id)
-      success = false
+      @comment = Comment.find_comments(task_id)
     end
+
     if success == true
       render "task_comment_page", comment: @comment, notice: "comment was assigned successfully"
     end
@@ -90,8 +109,12 @@ class TasksController < ApplicationController
     def task_comment_condition(params)
       (params[:task_id].present? &&
        params[:comment_name].present? &&
-       params[:comment_name].present? &&
+       params[:comment_description].present? &&
        params[:commit].present?)
+    end
+
+    def task_id_condition(params)
+      !params[:commit].present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

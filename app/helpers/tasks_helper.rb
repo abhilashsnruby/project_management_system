@@ -4,7 +4,9 @@ module TasksHelper
     current_time = Time.now
     created_date = (comment.created_at.strftime('%d').to_i)
     created_hour = (comment.created_at.strftime('%H').to_i)
-    (created_hour < 24) ? (created_hour.to_s + " hours ago") : find_current_details(created_date)
+    current_hour = current_time.strftime('%H').to_i
+    hours_ago = current_hour - created_hour
+    (created_hour < 24) ? (hours_ago.to_s + " hours ago") : find_current_details(created_date)
   end
 
   def find_current_details(created_date)
