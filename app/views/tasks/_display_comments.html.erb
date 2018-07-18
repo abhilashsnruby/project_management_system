@@ -18,6 +18,9 @@
       <small> <%= link_to 'Edit', task_comment_page_tasks_path(:comment_id => comment.id) %> </small>
     </div>
 
+    <div>
+      <small> <%= link_to 'Delete', task_comment_page_tasks_path(:my_service => { destroy_comment_id: comment.id, task_id: comment.task_id} ), data: {comfirm: 'Are you sure?'} %> </small>
+    </div>
     <hr>
 
   <% end %>

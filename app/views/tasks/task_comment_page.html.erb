@@ -17,10 +17,16 @@
 <div>
   <%= form_tag(task_comment_page_tasks_path, :id => "comment_tasks", :name => "searchForm", :method => :get) do %>
 
-    <%= hidden_field_tag 'task_id', (params[:comment_id].present? ? Comment.find(params[:comment_id]).task_id : params[:task_id]) %>
+    <% if params[:comment_id].present? %>
+      <%= hidden_field_tag 'task_id', Comment.find(params[:comment_id]).task_id %>
+    <% elsif params[:destroy_comment_id].present? %>
+      <%= hidden_field_tag 'task_id', params[:task_id] %>
+    <% else %>
+      <%= hidden_field_tag 'task_id', params[:task_id] %>
+    <% end %>
 
     <% if comment_id.present? %>
-      
+
       <div class = 'comment_name'>
         <% if comment_name.present? %>
           <%= text_field_tag "comment_name", "#{comment_name}" %>

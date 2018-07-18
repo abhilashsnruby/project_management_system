@@ -66,6 +66,14 @@ class TasksController < ApplicationController
   end
 
   def task_comment_page
+    if params[:destroy_comment_id].present?
+      @comment = Comment.find(params[:destroy_comment_id])
+      task_id = @comment.task_id
+      @comment.destroy
+      @comment_destory_data = Comment.find_comments(task_id)
+      success = true
+    end
+
     if params[:comment_id].present?
       if params[:commit] == 'update'
         @comment = Comment.find(params[:comment_id])
@@ -85,14 +93,14 @@ class TasksController < ApplicationController
     description = params['comment_description']
     if task_id_condition(params)
       if !params[:comment_id].present?
-        @comment = Comment.find_comments(task_id)
+        @comment = @comment_destory_data.present? ? @comment_destory_data : Comment.find_comments(task_id)
         success = true
       end
     elsif task_comment_condition(params)
       @comment = Comment.assign_comments_to_task(task_id, comment_name, description)
       success == true
     else
-      @comment = Comment.find_comments(task_id)
+      @comment = @comment_destory_data.present? ? @comment_destory_data : Comment.find_comments(task_id)
     end
 
     if success == true

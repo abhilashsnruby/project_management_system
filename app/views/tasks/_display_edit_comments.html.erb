@@ -16,6 +16,7 @@
     
     <div>
       <small> <%= link_to 'Edit', task_comment_page_tasks_path(:comment_id => comment.id) %> </small>
+      <small> <%= link_to 'Delete', task_comment_page_tasks_path(destroy_comment_id: comment.id, task_id: comment.task_id) %> </small>
     </div>
 
     <hr>
