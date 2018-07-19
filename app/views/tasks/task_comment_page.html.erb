@@ -18,10 +18,13 @@
   <%= form_tag(task_comment_page_tasks_path, :id => "comment_tasks", :name => "searchForm", :method => :get) do %>
 
     <% if params[:comment_id].present? %>
+      <% @comment_count = no_of_comments_with_comment_id(params) %>
       <%= hidden_field_tag 'task_id', Comment.find(params[:comment_id]).task_id %>
     <% elsif params[:destroy_comment_id].present? %>
+      <% @comment_count = no_of_comments_with_comment_id(params) %>
       <%= hidden_field_tag 'task_id', params[:task_id] %>
     <% else %>
+      <% @comment_count = no_of_comments_with_comment_id(params) %>
       <%= hidden_field_tag 'task_id', params[:task_id] %>
     <% end %>
 
@@ -78,3 +81,12 @@
     <div>
   <% end %>
 <% end %>
+
+ <div>
+   <small> Comments <%= @comment_count %> </small>
+ </div>
+
+ <div>
+   <small> <%= link_to 'task list', display_task_details_tasks_path %> </small>
+ </div>
+

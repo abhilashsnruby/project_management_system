@@ -20,4 +20,14 @@ module TasksHelper
   def find_current_details(created_date)
     (Time.now.strftime('%d').to_i - created_date).to_s + " days ago"
   end
+
+  def no_of_comments_with_comment_id(params)
+    comment_id = params[:comment_id]
+    task_id = params[:task_id]
+    if comment_id.present?
+      Task.find(Comment.find(comment_id).task_id).comments.count
+    elsif task_id.present?
+      Task.find(task_id).comments.count
+    end
+  end
 end

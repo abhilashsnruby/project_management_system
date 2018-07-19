@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+
+ #show_message,.alert {position:relative;}
+ .clear{clear:both}

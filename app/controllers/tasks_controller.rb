@@ -67,11 +67,13 @@ class TasksController < ApplicationController
 
   def task_comment_page
     if params[:destroy_comment_id].present?
-      @comment = Comment.find(params[:destroy_comment_id])
-      task_id = @comment.task_id
-      @comment.destroy
-      @comment_destory_data = Comment.find_comments(task_id)
-      success = true
+      begin
+        @comment = Comment.find(params[:destroy_comment_id])
+        @comment.destroy
+      rescue Exception => e
+        @comment_destory_data = Comment.find_comments(params[:task_id])
+        success = true
+      end
     end
 
     if params[:comment_id].present?
@@ -110,6 +112,7 @@ class TasksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
     def set_task
       @task = Task.find(params[:id])
     end
