@@ -15,7 +15,7 @@
 <% end %>
 
 <div>
-  <%= form_tag(task_comment_page_tasks_path, :id => "comment_tasks", :name => "searchForm", :method => :get) do %>
+  <%= form_tag(task_comment_page_tasks_path,  html: {multipart: true}, :id => "comment_tasks", :name => "searchForm", :method => :get) do %>
 
     <% if params[:comment_id].present? %>
       <% @comment_count = no_of_comments_with_comment_id(params) %>
@@ -46,6 +46,10 @@
         <% end %>
       </div><br/>
 
+      <div class = 'file_upload'>
+        <%= file_field_tag 'item[document][]', :accept => 'pdf', :multiple => true, class: 'drop-target' %>
+      </div><br/>
+
       <p>
         <%= submit_tag "update", id: 'update_form'%>
         <%= hidden_field_tag 'comment_id', params[:comment_id] %>
@@ -59,7 +63,11 @@
 
       <div class = 'comment_desc'>
         <%= text_area_tag "comment_description", nil, placeholder: 'Enter description'%>
-      </div>
+      </div><br/>
+
+      <div class = 'file_upload'>
+        <%= file_field_tag 'item[document][]', :accept => 'pdf', :multiple => true, class: 'drop-target' %>
+      </div><br/>
 
       <p>
         <%= submit_tag "submit", id: 'submit_form'%>

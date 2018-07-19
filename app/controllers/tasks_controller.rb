@@ -99,7 +99,7 @@ class TasksController < ApplicationController
         success = true
       end
     elsif task_comment_condition(params)
-      @comment = Comment.assign_comments_to_task(task_id, comment_name, description)
+      @comment = Comment.assign_comments_to_task(task_id, comment_name, description, params[:item])
       success == true
     else
       @comment = @comment_destory_data.present? ? @comment_destory_data : Comment.find_comments(task_id)
