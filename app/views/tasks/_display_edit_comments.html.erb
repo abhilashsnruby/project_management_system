@@ -10,6 +10,10 @@
       <%= comment.comment_text %>
     </p>
 
+    <% if comment.file.present? %>
+      <%= link_to "#{comment.file}", task_comment_page_tasks_path(:file_service => { destroy_comment_id: comment.id }) %>
+    <% end %>
+
     <small>
       <%= commented_hours_ago(comment) %> 
     </small>

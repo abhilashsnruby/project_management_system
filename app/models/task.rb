@@ -2,6 +2,7 @@ class Task < ApplicationRecord
   belongs_to :project
   has_many :tasks, dependent: :destroy
   has_many :comments, dependent: :destroy
+  before_action :authenticate_user!
 
   def self.find_task_details(params)
     priority_val, status_val, priorities, deadlines, status = [], [], [], [], []

@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /tasks
   # GET /tasks.json
@@ -66,6 +67,7 @@ class TasksController < ApplicationController
   end
 
   def task_comment_page
+    file = params['file']
     if params[:destroy_comment_id].present?
       begin
         @comment = Comment.find(params[:destroy_comment_id])
@@ -81,7 +83,9 @@ class TasksController < ApplicationController
         @comment = Comment.find(params[:comment_id])
         @comment.update_attributes!(comment_name: params[:comment_name],
                                    comment_text: params[:comment_text], 
-                                   task_id: params[:task_id], created_date_record: Comment.retrive_present_time)
+                                   task_id: params[:task_id],
+                                   created_date_record: Comment.retrive_present_time,
+                                   file: file)
         @comment = Comment.find_comments(params[:task_id])
         success = true
       else
@@ -99,7 +103,7 @@ class TasksController < ApplicationController
         success = true
       end
     elsif task_comment_condition(params)
-      @comment = Comment.assign_comments_to_task(task_id, comment_name, description, params[:item])
+      @comment = Comment.assign_comments_to_task(task_id, comment_name, description, file)
       success == true
     else
       @comment = @comment_destory_data.present? ? @comment_destory_data : Comment.find_comments(task_id)
