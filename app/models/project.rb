@@ -9,4 +9,18 @@ class Project < ApplicationRecord
     Task.save_task_status_details(tasks, status, params)
   end
 
+  # def self.prgrub
+  #   binding.pry
+  #   a = [12,21,12,1]
+  #   numbers = []
+  #   a.each_with_index do |num, index|
+  #     binding.pry
+  #     if (a[index] > a[index + 1])
+  #       numbers << a[index + 1]
+  #     else
+  #       numbers << a[index]
+  #     end
+  #   end
+  # end
+
 end
