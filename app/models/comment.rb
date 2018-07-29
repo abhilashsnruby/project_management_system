@@ -1,8 +1,8 @@
 class Comment < ApplicationRecord
+  resourcify
   belongs_to :task
   mount_uploader :file, AvatarUploader
   attr_accessor :file
-  before_action :authenticate_user!
 
   def self.assign_comments_to_task(task_id, comment_name, description, file)
     comment = Comment.last

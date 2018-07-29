@@ -1,12 +1,13 @@
 class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, :except => [:show, :index]
+  before_action :authenticate_user!
 
   def index
     @projects = Project.all
   end
 
   def new
+    check_for_moderate_users
     @project = Project.new
   end
 
@@ -28,9 +29,19 @@ class ProjectsController < ApplicationController
   end
 
   def show
+
   end
 
   def edit
+
+  end
+
+  def destroy
+    @project.destroy
+    respond_to do |format|
+      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   def assign_tasks

@@ -91,9 +91,9 @@
 <% end %>
 
  <div>
-   <small> Comments <%= @comment_count %> </small>
+   <small> Comments - <%= (@comment_count.nil? ? 0 : @comment_count) %> </small>
  </div>
 
  <div>
-   <small> <%= link_to 'task list', display_task_details_tasks_path %> </small>
+   <small> <%= link_to 'Dashboard', dashboard_index_path %> </br> </small>
  </div>

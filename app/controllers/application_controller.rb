@@ -1,9 +1,44 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_session_parameters, if: :devise_controller?
   after_action :get_user_details
   alias_method :devise_current_user, :current_user
 
+  rescue_from CanCan::AccessDenied do |exception|
+    render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false
+    ## to avoid deprecation warnings with Rails 3.2.x (and incidentally using Ruby 1.9.3 hash syntax)
+    ## this render call should be:
+    # render file: "#{Rails.root}/public/403", formats: [:html], status: 403, layout: false
+  end
+
+  def multi_authorize(actions, model, all: true)
+    predicate = all ? :all? : :any?
+    actions.send(predicate) do |action|
+      begin
+        authorize! action, model
+      rescue CanCan::AccessDenied => e
+        false
+      end
+    end
+  end
+
+  def check_for_moderate_users
+    authorize! :read, @projects
+  end
+
+  def check_admin_authorization
+    if validata_admin_users
+      multi_authorize([:read, :create, :update], Project, all: '')
+    end
+  end
+
+  def return_for_super_user?
+    super_user = ["superuser", "super_user"]
+    if (User.count > 0)
+      super_user_exists = User.where(user_name: super_user).present? ? true : false
+    end
+    super_user_exists
+  end
 
   def get_user_details
     if params[:user].present?
@@ -25,6 +60,12 @@ class ApplicationController < ActionController::Base
    end
  end
 
+ def validata_admin_users
+   current_user.has_role?('superuser') ||
+   current_user.has_role?('super_user') ||
+   current_user.has_role?('admin')
+ end
+
  def current_user
    if params[:user_id].blank?
       devise_current_user
@@ -35,7 +76,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:user_id, :user_name, :email, :password, :password_confirmation])
+  def configure_session_parameters
+    devise_parameter_sanitizer.permit(:sign_in) do |user_params|
+      user_params.permit(:user_id, :user_name, :email, :password, :remember_me)
+    end
   end
 end

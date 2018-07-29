@@ -17,9 +17,11 @@
         <td><%= project.title %></td>
         <td><%= project.description %></td>
         <td><%= project.category_name %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.has_role?("superuser") %>
+          <td><%= link_to 'Show', project %></td>
+          <td><%= link_to 'Edit', edit_project_path(project) %></td>
+          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -27,7 +29,5 @@
 
 <br>
 
-<%= link_to 'New Project', new_project_path %> </br>
-<%= link_to 'Assign Tasks', assign_tasks_projects_path %> </br>
-<%= link_to 'Comment Tasks', display_task_details_tasks_path %> </br>
-<%= link_to 'project_tasks', project_tasks_projects_path %>
+<%= link_to 'Add project', new_project_path %> </br>
+<%= link_to 'Dashboard', dashboard_index_path %> </br>
