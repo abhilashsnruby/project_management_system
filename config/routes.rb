@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' } do 
     get 'dashboard/index'
   end
+  
+  resources :project_owners do
+    get 'assign_projects_to_project_owner', on: :collection
+  end
+
   resources :tasks do
     get 'display_task_details', on: :collection
     get 'task_comment_page', on: :collection

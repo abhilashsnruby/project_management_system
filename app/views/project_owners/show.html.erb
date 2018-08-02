@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Project owner name:</strong>
+  <%= @project_owner.project_owner_name %>
+</p>
+
+<p>
+  <strong>Qualification:</strong>
+  <%= @project_owner.qualification %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @project_owner.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_project_owner_path(@project_owner) %> |
+<%= link_to 'Back', project_owners_path %>

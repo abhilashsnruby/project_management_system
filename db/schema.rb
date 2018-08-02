@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180727141006) do
+ActiveRecord::Schema.define(version: 20180802101932) do
 
   create_table "comments", force: :cascade do |t|
     t.string "comment_name"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 20180727141006) do
     t.index ["comment_id"], name: "index_documents_on_comment_id"
   end
 
+  create_table "project_owners", force: :cascade do |t|
+    t.string "project_owner_name"
+    t.string "qualification"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -37,6 +45,7 @@ ActiveRecord::Schema.define(version: 20180727141006) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "project_owner_id"
   end
 
   create_table "roles", force: :cascade do |t|

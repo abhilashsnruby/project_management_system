@@ -3,7 +3,7 @@
 <div class = 'dashboard'>
   <table>
     <tr>
-      <td> <%= link_to "#{user_name_detail(@user_name)}'s projects", projects_path %> - <%= user_projects(@user_projects) %> </td>
+      <td> <%= link_to "#{user_name_detail(@user_name)}'s projects", projects_path %> <%= user_projects(@user_projects) %> </td>
       <td> </td>
       <td> </td>
       <td> <%= link_to "Assign Tasks", assign_tasks_projects_path %> </td>
@@ -11,6 +11,8 @@
       <td> <%= link_to "Project Tasks", project_tasks_projects_path %> </td>
       <td> <%= link_to "Assign projects(users)", assign_projects_to_users_projects_path %> </td>
       <td> <%= link_to "Show user projects", view_user_project_details_projects_path %> </td>
+      <td> <%= link_to "Add project owners", project_owners_path %> </td>
+      <td> <%= link_to "Assign projects(project owners)", assign_projects_to_project_owner_project_owners_path %> </td>
     </tr>
   </table>
 </div>

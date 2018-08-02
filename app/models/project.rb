@@ -2,6 +2,7 @@ class Project < ApplicationRecord
   resourcify
   has_many :tasks, dependent: :destroy
   belongs_to :user
+  belongs_to :project_owner
 
   def self.assign_tasks_to_project(params) 
     tasks, priorities, deadlines, status = Task.find_task_details(params)
@@ -19,6 +20,7 @@ class Project < ApplicationRecord
     end
     projects
   end
+  
   # def self.prgrub
   #   binding.pry
   #   a = [12,21,12,1]

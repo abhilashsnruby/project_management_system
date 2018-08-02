@@ -1,0 +1,32 @@
+<%= form_with(model: project_owner, local: true) do |form| %>
+  <% if project_owner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project_owner.errors.count, "error") %> prohibited this project_owner from being saved:</h2>
+
+      <ul>
+      <% project_owner.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :project_owner_name %>
+    <%= form.text_field :project_owner_name, id: :project_owner_project_owner_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :qualification %>
+    <%= form.text_field :qualification, id: :project_owner_qualification %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.select "user_id", options_for_select(fetch_users), :id => "users", :prompt => 'select users' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

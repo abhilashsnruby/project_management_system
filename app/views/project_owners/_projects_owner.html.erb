@@ -1,0 +1,31 @@
+<br/><br/>
+<div id = 'project_owner_details'>
+
+  <% if @project_owner_projects.present? %>
+    <h3>Projects</h3>
+
+    <table border = '1'>
+      <thead>
+        <tr>
+          <th> Project Owner Name </th>
+          <th> Project Title </th>
+          <th> User Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @project_owner_projects.each do |project| %>
+          <tr>
+            <td><%= project.project_owner.try(:project_owner_name) %></td>
+            <td><%= project.title %></td>
+            <td><%= fetch_user_name(project) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+  <% else %>
+    <p> </p>
+  <% end %> <br>
+
+</div>

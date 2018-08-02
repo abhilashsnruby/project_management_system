@@ -1,0 +1,79 @@
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type = 'text/javascript'>
+
+    function validateFormElements(count){
+      var e = document.getElementById("project_owner");
+      var value;
+      var optionSelIndex = e.options[e.selectedIndex].value;
+      var optionSelectedText = e.options[e.selectedIndex].text;
+      var optionSelIndex = e.options[e.selectedIndex].value;
+      var optionSelectedText = e.options[e.selectedIndex].text;
+            
+      if (optionSelIndex == 0) {
+        alert("Please select a Project Owner");
+        return false;
+      }
+      else {
+        for(var i=0; i < (count - 1); i++) {
+          if(document.getElementById("owner_projects_project__"+ i).checked == true){
+            value = i + 1
+          }
+        }
+      }
+      if (value == undefined){
+        alert('Checkbox not checked');
+        return false;
+      }
+    }
+  </script>
+
+<% count = @projects.count %>
+
+<% 3.times do %>
+  <br/> 
+<% end %>
+
+<center>
+  <div id = "projects_owner_projects">
+    <%= form_tag(assign_projects_to_project_owner_project_owners_path, :id => "projects_owner_form", :name => "searchForm", :remote => true, :onsubmit=>"return validateFormElements(#{count});", :method => :get) do %>
+      
+      <table>
+
+        <tr>
+          
+          <% 4.times do %>
+            <td></td>
+          <% end %>
+
+          <td>
+            <%= select_tag "project_owner", options_for_select(all_project_owner), prompt: 'select a project owner'%>
+          </td>
+        </tr>
+
+        <tr>
+          <% @projects.each_with_index do |project, index| %>
+            <td> <%= check_box_tag "owner_projects[project][][#{index}]", project.title %> <%= project.title %> </td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <% 4.times do %>
+            <td></td>
+          <% end %>
+          <td>
+            <%= submit_tag "submit", class: 'btn btn-large btn-danger'%>
+          </td>
+
+        </tr> <br/>
+
+      </table>
+
+    <% end %>
+    <%= link_to 'Dashboard', dashboard_index_path %> </br>
+  </div>
+
+    <div id="projects_owner_data">
+       <%= render 'projects_owner' %>
+    </div>
+
+</center>
