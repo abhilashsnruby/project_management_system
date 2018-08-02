@@ -9,7 +9,23 @@ class User < ApplicationRecord
 
   scope :find_all_super_users, -> { joins(:roles).where("roles.name = ?", 'superuser' ) }
 
+  scope :find_all_moderators, -> { joins(:roles).where("roles.name = ?", 'moderator' ) }
+
   # before_save :check_super_user_exists?, User.User.where(user_name: super_user).present?
+
+  def self.extract_uique_users_with_role
+    if User.present?
+      mod_sup_or = (User.find_all_moderators.pluck(:id) | User.find_all_super_users.pluck(:id))
+      mod_sup_ad = (User.find_all_moderators.pluck(:id) & User.find_all_super_users.pluck(:id))
+      (mod_sup_or - mod_sup_ad)
+    end
+  end
+
+  def find_user_role(user)
+    user.has_role?('superuser') ||
+    user.has_role?('super_user') ||
+    user.has_role?('admin')
+  end
 
   def self.return_error_message(user)
     user.errors.messages.keys[0].to_s + " " + user.errors.messages.values[0].first

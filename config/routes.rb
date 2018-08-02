@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'users/index'
+
   get 'dashboard/index'
 
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' } do 
@@ -9,9 +11,14 @@ Rails.application.routes.draw do
     get 'display_task_details', on: :collection
     get 'task_comment_page', on: :collection
   end
+
   resources :projects do
+    post 'populate_projects', on: :collection
     get 'assign_tasks', on: :collection
     get 'project_tasks', on: :collection
+    get 'assign_projects_to_users', on: :collection
+    get 'show_projects_of_users', on: :collection
+    get 'view_user_project_details', on: :collection
   end
   
   root to: "dashboard#index"

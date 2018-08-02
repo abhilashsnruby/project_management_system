@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  load_and_authorize_resource except: [:populate_projects]
 
   def index
     @projects = Project.all
@@ -44,7 +45,37 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def view_user_project_details
+    @users = User.all
+  end
+
+  def populate_projects
+    if params["user_id"].present?
+      user = User.find(params["user_id"])
+      @user_projects = user.projects
+      @user_error_messages = []
+      @user_error_messages << 'User does not have any projects assigned' if @user_projects.empty?
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def show_projects_of_users
+    @projects = Project.all
+    current_user = params[:format]
+    redirect_to projects_url, :project => @projects, alert: "project does not belong to #{current_user}"
+  end
+
+  def assign_projects_to_users
+    @projects = Project.all
+    if params["user_name"].present? && params["user_projects"].present?
+      @user_projects = Project.assign_projects_to_users(params)
+    end
+  end
+
   def assign_tasks
+    check_for_moderate_users
     @projects = Project.all
     @tasks = Task.all
     project = params[:project].present?

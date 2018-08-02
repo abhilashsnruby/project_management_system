@@ -1,0 +1,26 @@
+<br/><br/>
+<div id = 'user_details'>
+  <h3>Projects</h3>
+
+  <table border = '1'>
+    <thead>
+      <tr>
+        <th> User Name </th>
+        <th> Project Title </th>
+        <th> Email </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user_projects.each do |project| %>
+        <tr>
+          <td><%= user_data(project, 'user_name')%></td>
+          <td><%= project.title %></td>
+          <td><%= user_data(project, 'email')%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+</div>

@@ -1,0 +1,51 @@
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type = 'text/javascript'>
+
+    function send_user_details(user_id) {
+      $.ajax({
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        },
+        url: "/projects/populate_projects",
+        type: "POST",
+        data: {
+          "user_id" : user_id }
+      });
+    }
+
+  </script>
+
+<% 3.times do %>
+  <br/> 
+<% end %>
+
+<center>
+  <div id = "user_projects">
+    <%= form_tag(view_user_project_details_projects_path, :remote => true, :id => "view_user_projects_form", :name => "searchForm", :method => :get) do %>
+      
+      <table>
+
+        <tr>
+          
+          <% 4.times do %>
+            <td></td>
+          <% end %>
+
+          <td>
+            <%= select_tag "User", options_from_collection_for_select(@users, "id", "user_name"), :id => "user_names", :prompt => 'select users', onchange: "send_user_details(this.value);" %>
+          </td>
+        </tr>
+        
+        <br/>
+
+      </table>
+
+    <% end %>
+    <%= link_to 'Dashboard', dashboard_index_path %> </br>
+  </div>
+
+    <div id="suppliers">
+     <%= render 'project_details_for_users' %>
+   </div>
+
+</center>

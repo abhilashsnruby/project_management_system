@@ -1,0 +1,35 @@
+<br/>
+<div id = 'project_details'>
+
+<% if @user_projects.present? %>
+  
+  <h3>Projects</h3>
+
+  <table border = '1'>
+    <thead>
+      <tr>
+        <th> Project Title </th>
+        <th> Description </th>
+        <th> Category Name </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user_projects.each do |project| %>
+        <tr>
+          <td><%= project.title %></td>
+          <td><%= project.description %></td>
+          <td><%= project.category_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% elsif @user_error_messages.present? %>
+  
+  <h5 style = "color:red"><%= @user_error_messages[0] %></h5>
+
+<% end %>
+
+<br>
+</div>

@@ -16,3 +16,7 @@
 
  #show_message,.alert {position:relative;}
  .clear{clear:both}
+
+ #alert {
+  color: red;
+}

@@ -1,33 +1,42 @@
-<p id="notice"><%= notice %></p>
+<div id="my_id">
 
-<h1>Projects</h1>
+  <p id="notice"><%= notice %></p>
 
-<table border = '1'>
-  <thead>
-    <tr>
-      <th> Title </th>
-      <th> Description </th>
-      <th> Category Name </th>
-    </tr>
-  </thead>
+  <p id="alert"><%= alert %></p>
 
-  <tbody>
-    <% @projects.each do |project| %>
+  <h1>Projects</h1>
+
+  <table border = '1'>
+    <thead>
       <tr>
-        <td><%= project.title %></td>
-        <td><%= project.description %></td>
-        <td><%= project.category_name %></td>
-        <% if current_user.has_role?("superuser") %>
-          <td><%= link_to 'Show', project %></td>
-          <td><%= link_to 'Edit', edit_project_path(project) %></td>
-          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
+        <th> Title </th>
+        <th> Description </th>
+        <th> Category Name </th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= project.title %></td>
+          <td><%= project.description %></td>
+          <td><%= project.category_name %></td>
+          <% if check_owners_role? && compare_with_users_id(project) %>
+            <td><%= link_to 'Show', project %></td>
+            <td><%= link_to 'Edit', edit_project_path(project) %></td>
+            <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% else %>
+            <td><%= link_to 'Show', show_projects_of_users_projects_path(current_user.user_name) %></td>
+            <td><%= link_to 'Edit', edit_project_path(project) %></td>
+            <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'Add project', new_project_path %> </br>
-<%= link_to 'Dashboard', dashboard_index_path %> </br>
+  <br>
+    
+  <%= button_to('Add project', new_project_path, :method => :get, class: 'btn btn-large btn-danger')  %></br>
+  <%= link_to 'Dashboard', dashboard_index_path %> </br>
+</div>

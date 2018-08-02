@@ -30,7 +30,7 @@
   function checkForm(){
     var checked=false;
     var elements = document.getElementsByName("task[]");
-    for(var i=0; i < elements.length; i++){      
+    for(var i=0; i < elements.length; i++){
       if(elements[i].checked) {
         checked = true;
       }
@@ -93,17 +93,11 @@
 
     <div id="target_<%= index %>"></div>
 
-    <!-- <div>
-      <% @index = index %>
-      <%= render partial: 'tasks/add_comments', :index => @index %>
-    </div> </br> </br> -->
-
   <% end %>
-  </p>
-
-  <p>
-    <%= submit_tag "submit"%>
-  </p>
+    
+    <p>
+      <%= submit_tag "submit", class: 'btn btn-large btn-danger'%>
+    </p>
 
 <% end %>
 </div>

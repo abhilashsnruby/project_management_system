@@ -1,0 +1,74 @@
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type = 'text/javascript'>
+
+    function validateFormElements(count){
+      var e = document.getElementById("user_name");
+      var value;
+      var optionSelIndex = e.options[e.selectedIndex].value;
+      var optionSelectedText = e.options[e.selectedIndex].text;
+      var optionSelIndex = e.options[e.selectedIndex].value;
+      var optionSelectedText = e.options[e.selectedIndex].text;
+            
+      if (optionSelIndex == 0) {
+        alert("Please select a User");
+        return false;
+      }
+      else {
+        for(var i=0; i < (count - 1); i++) {
+          if(document.getElementById("user_projects_project__"+ i).checked == true){
+            value = i + 1
+          }
+        }
+      }
+      if (value == undefined){
+        alert('Checkbox not checked');
+        return false;
+      }
+    }
+  </script>
+
+<% count = @projects.count %>
+
+<% 3.times do %>
+  <br/> 
+<% end %>
+
+<center>
+  <div id = "user_projects">
+    <%= form_tag(assign_projects_to_users_projects_path, :id => "user_projects_form", :name => "searchForm", :remote => true, :onsubmit=>"return validateFormElements(#{count});", :method => :get) do %>
+      
+      <table>
+
+        <tr>
+          
+          <% 4.times do %>
+            <td></td>
+          <% end %>
+
+          <td>
+            <%= select_tag "user_name", options_for_select(all_project_users), prompt: 'select a user'%>
+          </td>
+        </tr>
+
+        <tr>
+          <% @projects.each_with_index do |project, index| %>
+            <td> <%= check_box_tag "user_projects[project][][#{index}]", project.title %> <%= project.title %> </td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <% 4.times do %>
+            <td></td>
+          <% end %>
+          <td>
+            <%= submit_tag "submit", class: 'btn btn-large btn-danger'%>
+          </td>
+
+        </tr> <br/>
+
+      </table>
+
+    <% end %>
+    <%= link_to 'Dashboard', dashboard_index_path %> </br>
+  </div>
+</center>
