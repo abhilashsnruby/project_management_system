@@ -11,6 +11,11 @@ class DashboardController < ApplicationController
       @user_email = @loged_in_user.attributes['email']
       @user_projects = @loged_in_user.projects
     end
+    if current_user.roles.pluck(:name).include?('admin') == true
+      redirect_to '/admin'
+    else
+      render template: 'dashboard/index'
+    end
   end
 
 end

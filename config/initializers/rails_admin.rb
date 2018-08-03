@@ -5,12 +5,60 @@ RailsAdmin.config do |config|
   end
   ### Popular gems integration
 
+  config.model ProjectOwner do
+    list do
+      field :id do
+        formatted_value do
+          path = bindings[:view].show_path(model_name: 'ProjectOwner', id: bindings[:object].id)
+          bindings[:view].link_to(bindings[:object].id, path)
+        end
+      end
+      field :project_owner_name do
+        formatted_value do
+          bindings[:object].project_owner_name
+        end
+      end
+      field :qualification do
+        formatted_value do
+          bindings[:object].qualification
+        end
+      end
+      field :user_id do
+        formatted_value do
+          bindings[:object].qualification
+        end
+      end
+      field :created_at do
+        formatted_value do
+          bindings[:object].created_at
+        end
+      end
+      field :updated_at do
+        formatted_value do
+          bindings[:object].updated_at
+        end
+      end
+    end
+  end
+
+  # config.model Utility do
+  # configure :preview do
+  #   pretty_value do
+  #     util = bindings[:object]
+  #     %{<div class="blah">
+  #         #{util.name} #{util.phone} #{util.logo}
+  #       </div >}
+  #   end
+  #   children_fields [:name, :phone, :logo] # will be used for searching/filtering, first field will be used for sorting
+  #   read_only true # won't be editable in forms (alternatively, hide it in edit section)
+  # end
+
   ## == Devise ==
   # config.authenticate_with do
   #   warden.authenticate! scope: :user
   # end
   # config.current_user_method(&:current_user)
-
+  config.current_user_method(&:current_user)
   ## == Cancan ==
   # config.authorize_with :cancan
 
