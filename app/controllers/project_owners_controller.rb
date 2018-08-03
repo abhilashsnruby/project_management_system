@@ -1,5 +1,6 @@
 class ProjectOwnersController < ApplicationController
   before_action :set_project_owner, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource except: [:assign_projects_to_project_owner]
 
   # GET /project_owners
   # GET /project_owners.json
@@ -38,6 +39,7 @@ class ProjectOwnersController < ApplicationController
   end
 
   def assign_projects_to_project_owner
+    check_for_moderate_users
     @projects = Project.all
     if params[:project_owner].present? && params[:owner_projects].present?
       @project_owner_projects = ProjectOwner.save_project_owner_details(params)

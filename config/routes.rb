@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'users/index'
-
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
   get 'dashboard/index'
 
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' } do 

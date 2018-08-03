@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_session_parameters, if: :devise_controller?
   after_action :get_user_details
-  alias_method :devise_current_user, :current_user
 
   rescue_from CanCan::AccessDenied do |exception|
     render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false
@@ -64,14 +63,6 @@ class ApplicationController < ActionController::Base
    current_user.has_role?('superuser') ||
    current_user.has_role?('super_user') ||
    current_user.has_role?('admin')
- end
-
- def current_user
-   if params[:user_id].blank?
-      devise_current_user
-   else
-     User.find(params[:user_id])
-   end
  end
 
   protected

@@ -14,8 +14,16 @@
   <% end %>
 <% end %>
 
+<% 3.times do %>
+  <br/> 
+<% end %>
+
 <div>
   <%= form_tag(task_comment_page_tasks_path,  html: { multipart: true }, :id => "comment_tasks", :name => "searchForm", :method => :get) do %>
+
+    <div>
+      <p id="notice"><%= notice %></p>
+    </div>
 
     <% if params[:comment_id].present? %>
       <% @comment_count = no_of_comments_with_comment_id(params) %>
