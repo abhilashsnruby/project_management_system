@@ -1,0 +1,8 @@
+<% 3.times do %>
+  <br/> 
+<% end %>
+
+<%= form_tag import_projects_path, multipart: true, method: :get do %>
+ <%= file_field_tag :file %>
+ <%= submit_tag 'Import CSV'%>
+<% end %>

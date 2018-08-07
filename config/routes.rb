@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :employees
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
   get 'dashboard/index'
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   resources :projects do
+    get 'import', on: :collection
     post 'populate_projects', on: :collection
     get 'assign_tasks', on: :collection
     get 'project_tasks', on: :collection

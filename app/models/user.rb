@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :projects, dependent: :destroy
+  belongs_to :employee
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, password_length: 10..128
@@ -43,6 +44,9 @@ class User < ApplicationRecord
     end
   end
   
+  def self.retrive_employees
+    (Employee.count > 0) ? Employee.all.pluck(:empname) : ''
+  end
   # def self.check_super_user_exists(users, user)
   #   if users.present?
   #     user_names = User.pluck(:user_name)

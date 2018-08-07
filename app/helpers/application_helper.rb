@@ -45,4 +45,8 @@ module ApplicationHelper
     current_user_project_ids = current_user.projects.pluck(:id)
     current_user_project_ids.present? ? current_user_project_ids.include?(project.id) : false
   end
+
+  def retrive_employee_names
+    (Employee.count > 0) ? Employee.all.pluck(:empname, :id) : ''
+  end
 end

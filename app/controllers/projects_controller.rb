@@ -1,10 +1,21 @@
 class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  load_and_authorize_resource except: [:populate_projects]
+  load_and_authorize_resource except: [:populate_projects, :project_tasks, :view_user_project_details, :import]
 
   def index
     @projects = Project.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @projects.to_csv(['title','description',
+                                               'category_name','user_id',
+                                               'project_owner_id',
+                                               'user_name',
+                                               'email',
+                                               'password',
+                                               'password_confirmation',
+                                               'employee_id'])}
+    end
   end
 
   def new
@@ -90,6 +101,13 @@ class ProjectsController < ApplicationController
 
   def project_tasks
     @projects = Project.all
+  end
+
+  def import
+    if params[:file].present?
+      Project.import(params[:file])
+      redirect_to projects_url, notice: "Projects Uploaded successfully"
+    end
   end
 
   private

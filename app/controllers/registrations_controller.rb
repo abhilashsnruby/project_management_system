@@ -11,7 +11,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-
     result = resource.save
     User.assign_roles_to_user(params, @user) if result
     yield resource if block_given?
@@ -173,7 +172,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def sign_up_params
-    params.require(:user).permit(:id, :user_name, :email, :password, :password_confirmation, :user_role)
+    params.require(:user).permit(:id, :user_name, :email, :password, :password_confirmation, :user_role, :employee_id)
   end
 
   def account_update_params

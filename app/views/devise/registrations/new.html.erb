@@ -26,6 +26,11 @@
       <%= f.password_field :password_confirmation, autocomplete: "off" %>
     </div>
 
+    <div class="field">
+      <%= f.label :employee_id %><br />
+      <%= f.select :employee_id, options_for_select(retrive_employee_names), :id => "employee_names", :prompt => 'select employees', autofocus: true %>
+    </div>
+
     Roles
     <div class="field">
       <% user_roles.each_with_index do |role, index| %>
