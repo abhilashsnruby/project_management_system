@@ -1,0 +1,17 @@
+$('#search_projects_data_form')[0].reset();
+$("#project_search_details").remove();
+$("#employee_search_details").remove();
+$("#users_search_details").remove();
+
+<% if params['data'].present? %>
+  <% if params['data'] == "Project" %>
+    $("#project_search_details").remove();
+    $("#projects_employees_users").append("<%= escape_javascript(render partial: 'project_search_details') %>");
+  <% elsif params['data'] == "Employee" %>
+    $("#employee_search_details").remove();
+    $("#projects_employees_users").append("<%= escape_javascript(render partial: 'employees_search_details') %>");
+  <% else %>
+    $("#users_search_details").remove();
+    $("#projects_employees_users").append("<%= escape_javascript(render partial: 'users_search_details') %>");
+  <% end %>
+<% end %>

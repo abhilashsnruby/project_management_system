@@ -1,0 +1,136 @@
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type = 'text/javascript'>
+    function retrivePaginatedData(searched_values) {
+
+    }
+  </script>
+
+
+<div id = 'project_search_details'>
+
+  <% if @project_details.present? %>
+    <br/>    
+    <table border = '1', id = "project_search_table_details">
+      <thead>
+        <tr>
+          <th> Project Title </th>
+          <th> Description </th>
+          <th> Category Name </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @project_details.each_with_index do |project, index| %>
+          <% if index <= 3 %>
+            <tr>
+              <td><%= link_to project.title, project %></td>
+              <td><%= project.description %></td>
+              <td><%= project.category_name %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <br>
+    <% searched_values = retrive_data_for_pagination("Project", 4).flatten %>
+    
+    <div id = 'project_search_pagination'>
+      <%= button_tag "<--Previous " %>
+      <%= button_tag "Next -->", onclick: retrivePaginatedData(searched_values) %>
+    </div>
+
+    <br>
+
+  <% else %>
+    
+    <h5 style = "color:red"> </h5>
+
+  <% end %>
+
+  <br>
+
+  <% if @tasks.present? %>
+    
+    <table border = '1', id = "task_search_table_details">
+      <thead>
+        <tr>
+          <th> Task Name </th>
+          <th> Project </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @tasks.each_with_index do |task, index| %>
+          <% if index <= 3 %>
+            <tr>
+              <td><%= task.task_name %></td>
+              <td><%= Task.search_for_details(task) %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+    <% searched_values = retrive_data_for_pagination("Task", 4).flatten %>
+
+    <div id = 'task_search_pagination'>
+      <%= button_tag "<--Previous " %>
+      <%= button_tag "Next -->", onclick: retrivePaginatedData(searched_values) %>
+    </div>
+    <br>
+    
+  <% else %>
+    
+    <h5 style = "color:red"> </h5>
+
+  <% end %>
+
+  <br>
+
+  <% if @users.present? %>
+    
+    <table border = '1', id = "user_search_table_details">
+      <thead>
+        <tr>
+          <th> User Name </th>
+          <th> Email </th>
+          <th> Employee </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each_with_index do |user, index| %>
+          <% if index <= 3 %>
+            <tr>
+              <td><%= user.user_name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.employee.present? ? Employee.find(user.employee.id).empname : "" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+    <% searched_values = retrive_data_for_pagination("User", 4).flatten %>
+
+    <div id = 'user_search_pagination'>
+      <%= button_tag "<--Previous " %>
+      <%= button_tag "Next -->", onclick: retrivePaginatedData(searched_values) %>
+    </div>
+
+    <br>
+
+  <% else %>
+    
+    <h5 style = "color:red"> </h5>
+
+  <% end %>
+     <br>
+     
+     <%= link_to 'Dashboard', dashboard_index_path %> </br>
+  <br>
+
+</div>

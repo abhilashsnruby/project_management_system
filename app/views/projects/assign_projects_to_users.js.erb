@@ -1,4 +1,4 @@
 $('#user_projects_form')[0].reset();
   // window.location.href = "#{assign_projects_to_users_projects_path}"
-$('#user_details').empty();
+$('#user_details').remove();
 $('#user_projects').append("<%= j render partial: 'user_project_details' %>");

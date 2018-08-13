@@ -1,0 +1,53 @@
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type = 'text/javascript'>
+
+    $(document).ready(function(){
+      $('#search_projects_data_form').on('submit',function(){
+         var data = $("#data").val();
+         var elements = ["Project", "Employee", "User"]
+
+         if(data.length == 0){
+           alert("Please enter a string");
+           return false;
+         }
+         else{
+           if (elements.indexOf(data) > -1) {
+             return true;
+           }
+           else {
+             alert("Please enter either a Project or Employee or User");
+             return false;
+           }
+         }
+       });
+     });
+
+  </script>
+
+<% 3.times do %>
+  <br/>
+<% end %>
+
+<center>
+  <div id = "projects_employees_users">
+    <%= form_tag(search_projects_data_searches_path, :id => "search_projects_data_form", :name => "searchForm", :remote => true, :method => :get) do %>
+      
+      <table>
+
+        <tr>
+
+          <td> <%= text_field_tag "data", '' , size: 75 %> </td>
+
+          <td>  <%= submit_tag "Search", class: 'btn btn-large btn-danger'%> </td>
+        </tr> <br/>
+
+      <tr>
+
+        <td> enter Project or Employee or User </td>
+      </tr>
+
+    </table>
+
+    <% end %>
+  </div>
+</center>

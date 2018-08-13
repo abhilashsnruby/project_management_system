@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require dataTables/jquery.dataTables
  */
 
  #show_message,.alert {position:relative;}
@@ -20,3 +21,222 @@
  #alert {
   color: red;
 }
+
+#project_search_table_details {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#project_search_table_details td, #project_search_table_details th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#project_search_table_details tr:nth-child(even){background-color: #f2f2f2;}
+
+#project_search_table_details tr:hover {background-color: #ddd;}
+
+#project_search_table_details th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+#task_search_table_details {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#task_search_table_details td, #task_search_table_details th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#task_search_table_details tr:nth-child(even){background-color: #f2f2f2;}
+
+#task_search_table_details tr:hover {background-color: #ddd;}
+
+#task_search_table_details th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+#user_search_table_details {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#user_search_table_details td, #user_search_table_details th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#user_search_table_details tr:nth-child(even){background-color: #f2f2f2;}
+
+#user_search_table_details tr:hover {background-color: #ddd;}
+
+#user_search_table_details th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+#users_table_details {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#users_table_details td, #users_table_details th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#users_table_details tr:nth-child(even){background-color: #f2f2f2;}
+
+#users_table_details tr:hover {background-color: #ddd;}
+
+#users_table_details th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+#employees_table_details {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#employees_table_details td, #employees_table_details th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#employees_table_details tr:nth-child(even){background-color: #f2f2f2;}
+
+#employees_table_details tr:hover {background-color: #ddd;}
+
+#employees_table_details th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+#projects_table_details {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#projects_table_details td, #projects_table_details th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#projects_table_details tr:nth-child(even){background-color: #f2f2f2;}
+
+#projects_table_details tr:hover {background-color: #ddd;}
+
+#projects_table_details th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+#employee_details_search_table_data {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#employee_details_search_table_data td, #employee_details_search_table_data th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#employee_details_search_table_data tr:nth-child(even){background-color: #f2f2f2;}
+
+#employee_details_search_table_data tr:hover {background-color: #ddd;}
+
+#employee_details_search_table_data th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+#users_details_search_table_data {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#users_details_search_table_data td, #users_details_search_table_data th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#users_details_search_table_data tr:nth-child(even){background-color: #f2f2f2;}
+
+#users_details_search_table_data tr:hover {background-color: #ddd;}
+
+#users_details_search_table_data th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+.project_search_projects_pagination {
+  color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

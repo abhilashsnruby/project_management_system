@@ -89,4 +89,17 @@ class Task < ApplicationRecord
       end
     end
   end
+
+  def self.search_for_details(task)
+    task.project.present? ? task.project.title : ''
+  end
+
+  def self.retrive_tasks_data(params)
+    task_ids = Task.pluck(:id)
+    if (task_ids.count != 0) && (task_ids.count > params['index'].to_i)
+      Task.where(id: task_ids[task_ids[3] .. Task.count])
+    else
+      Task.all
+    end
+  end
 end

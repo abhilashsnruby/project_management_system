@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :searches do
+    get 'search_projects_data', on: :collection
+    get 'show_data', on: :collection
+  end
+
   resources :employees
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   

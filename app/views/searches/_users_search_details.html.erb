@@ -1,0 +1,98 @@
+<div id = 'users_search_details'>
+
+  <% array = ['user', 'employee', 'project'] %>
+
+  <% if array.count == 3 %>
+    <% if @users.present? %>
+      <br/>
+      <table border = '1', id = 'users_table_details'>
+        <thead>
+          <tr>
+            <th> User Name </th>
+            <th> Email </th>
+            <th> Employee </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.user_name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.employee_id %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    <% else %>
+      
+      <h5 style = "color:red"> </h5>
+
+    <% end %>
+
+    <br>
+
+    <% if @employees.present? %>
+      
+      <table border = '1', id = 'employees_table_details'>
+        <thead>
+          <tr>
+            <th> Employee Name </th>
+            <th> First Name </th>
+            <th> Second Name </th>
+            <th> Middle Name </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @employees.each do |employee| %>
+            <tr>
+              <td><%= link_to employee.empname, employee %></td>
+              <td><%= employee.first_name %></td>
+              <td><%= employee.second_name %></td>
+              <td><%= employee.middle_name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    <% else %>
+      
+      <h5 style = "color:red"> </h5>
+
+    <% end %>
+
+    <br>
+
+    <% if @projects.present? %>
+      
+      <table border = '1', id = 'projects_table_details'>
+        <thead>
+          <tr>
+            <th> Project Title </th>
+            <th> Description </th>
+            <th> Category Name </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @projects.each do |project| %>
+            <tr>
+              <td><%= project.title %></td>
+              <td><%= project.description %></td>
+              <td><%= project.category_name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    <% else %>
+      
+      <h5 style = "color:red"> </h5>
+
+    <% end %>
+       <%= link_to 'Dashboard', dashboard_index_path %> </br>
+    <br>
+  <% end %>
+</div>

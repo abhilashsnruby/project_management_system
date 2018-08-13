@@ -1,0 +1,64 @@
+<div id = 'employee_search_details'>
+
+  <% if @employees.present? %>
+    <br/>  
+    <table border = '1', id = 'employee_details_search_table_data'>
+      <thead>
+        <tr>
+          <th> Employee Name </th>
+          <th> First Name </th>
+          <th> Second Name </th>
+          <th> Middle Name </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @employees.each do |employee| %>
+          <tr>
+            <td><%= employee.empname %></td>
+            <td><%= employee.first_name %></td>
+            <td><%= employee.second_name %></td>
+            <td><%= employee.middle_name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% else %>
+    
+    <h5 style = "color:red"> </h5>
+
+  <% end %>
+
+  <br>
+
+  <% if @users.present? %>
+    
+    <table border = '1', id = 'users_details_search_table_data'>
+      <thead>
+        <tr>
+          <th> User Name </th>
+          <th> Email </th>
+          <th> Employee </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.user_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.employee_id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% else %>
+    
+    <h5 style = "color:red"> </h5>
+
+  <% end %>
+       <%= link_to 'Dashboard', dashboard_index_path %> </br>
+  <br>
+</div>

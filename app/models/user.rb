@@ -14,6 +14,22 @@ class User < ApplicationRecord
 
   # before_save :check_super_user_exists?, User.User.where(user_name: super_user).present?
 
+  def self.retrive_complete_user_details
+    @users = User.all
+    @employees = Employee.all
+    @projects = Project.all
+    [@users, @employees, @projects]
+  end
+
+  def self.retrive_users_data(params)
+    users_ids = User.pluck(:id)
+    if users_ids.count > params['index'].to_i
+      User.where(id: users_ids[users_ids[3] .. User.count])
+    else
+      User.all
+    end
+  end
+
   def self.extract_uique_users_with_role
     if User.present?
       mod_sup_or = (User.find_all_moderators.pluck(:id) | User.find_all_super_users.pluck(:id))
@@ -47,6 +63,7 @@ class User < ApplicationRecord
   def self.retrive_employees
     (Employee.count > 0) ? Employee.all.pluck(:empname) : ''
   end
+
   # def self.check_super_user_exists(users, user)
   #   if users.present?
   #     user_names = User.pluck(:user_name)

@@ -6,6 +6,22 @@ class Project < ApplicationRecord
   belongs_to :user
   belongs_to :project_owner
 
+  def self.retrive_complete_project_details
+    @projects = Project.all
+    @tasks = Task.all
+    @users = User.all
+    [@projects, @tasks, @users]
+  end
+
+  def self.retrive_projects_data(params)
+    projects_ids = Project.pluck(:id)
+    if projects_ids.count > params['index'].to_i
+      Project.where(id: projects_ids[projects_ids[3] .. Project.count])
+    else
+      Project.all
+    end
+  end
+
   def self.assign_tasks_to_project(params) 
     tasks, priorities, deadlines, status = Task.find_task_details(params)
     Task.save_task_priority_details(tasks, priorities, params)
