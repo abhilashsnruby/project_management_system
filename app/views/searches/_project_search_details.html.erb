@@ -9,7 +9,7 @@
 <div id = 'project_search_details'>
 
   <% if @project_details.present? %>
-    <br/>    
+    <br/>
     <table border = '1', id = "project_search_table_details">
       <thead>
         <tr>
@@ -37,7 +37,7 @@
     
     <div id = 'project_search_pagination'>
       <%= button_tag "<--Previous " %>
-      <%= button_tag "Next -->", onclick: retrivePaginatedData(searched_values) %>
+      <%= button_tag "Next -->", onclick: "return retrivePaginatedData(searched_values)" %>
     </div>
 
     <br>
@@ -77,7 +77,7 @@
 
     <div id = 'task_search_pagination'>
       <%= button_tag "<--Previous " %>
-      <%= button_tag "Next -->", onclick: retrivePaginatedData(searched_values) %>
+      <%= button_tag "Next -->", "return retrivePaginatedData(searched_values)" %>
     </div>
     <br>
     
@@ -118,7 +118,7 @@
 
     <div id = 'user_search_pagination'>
       <%= button_tag "<--Previous " %>
-      <%= button_tag "Next -->", onclick: retrivePaginatedData(searched_values) %>
+      <%= button_tag "Next -->", "return retrivePaginatedData(searched_values)" %>
     </div>
 
     <br>
