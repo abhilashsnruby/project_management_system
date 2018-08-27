@@ -1,0 +1,36 @@
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<center>
+  <div id = 'user_log_info'>
+    <p>
+      <strong> User Name:</strong>
+      <%= current_user.user_name%>
+    </p>
+
+    <p>
+      <strong> Projects: </strong>
+        <% if @projects.empty? %>
+          <p> Projects not found  </p>
+        <% else %>
+          <% @projects.each do |project| %>
+            <%= link_to project.title, project %>
+          <% end %>
+        <% end %>
+    </p>
+
+    <p>
+      <strong> Last Logged in:</strong>
+      <%= (current_user.last_sign_in_at) %>
+    </p>
+
+    <p>
+      <strong> Employee Name: </strong>
+      <%= @employee.empname %>
+    </p>
+  </div>
+  <%= link_to 'Dashboard', dashboard_index_path %> </br>
+</center>

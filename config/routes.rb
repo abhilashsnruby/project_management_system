@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     get 'show_data', on: :collection
   end
 
+  resources :record_logs
+
   resources :employees
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   

@@ -1,8 +1,11 @@
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script type = 'text/javascript'>
-    function retrivePaginatedData(searched_values) {
-
-    }
+    
+    $(document).ready(function() {
+      $("#previous_data_1").hide();
+      $("#previous_data_2").hide();
+      $("#previous_data_3").hide();
+    });
   </script>
 
 
@@ -32,12 +35,27 @@
       </tbody>
     </table>
     
+    <% table_counts = remaining_table_value_count %>
+
     <br>
-    <% searched_values = retrive_data_for_pagination("Project", 4).flatten %>
-    
+    <% previous_project_table_values = retrive_data_for_pagination("Project", 4,
+                                                                   "previous") %>
+    <% next_project_table_values = retrive_data_for_pagination("Project", 4, 
+                                                               "next") %>
+
     <div id = 'project_search_pagination'>
-      <%= button_tag "<--Previous " %>
-      <%= button_tag "Next -->", onclick: "return retrivePaginatedData(searched_values)" %>
+      <%= button_tag "<--Previous ", 
+                     id: 'previous_data_1', 
+                     class: 'btn btn-default',
+                     onClick: "return retrivePaginatedDataoFPrevious(#{previous_project_table_values}, 
+                                                                     #{next_project_table_values}, 'project_search_table_details', 
+                                                                       '1', #{table_counts});" %>
+      <%= button_tag "Next -->", 
+                     id: 'next_data_1' ,
+                     class: 'btn btn-default',
+                     onClick: "return retrivePaginatedDataoFNext(#{next_project_table_values}, 
+                                                                 #{previous_project_table_values}, 'project_search_table_details', 
+                                                                    '1', #{table_counts});" %>
     </div>
 
     <br>
@@ -73,11 +91,25 @@
     </table>
 
     <br>
-    <% searched_values = retrive_data_for_pagination("Task", 4).flatten %>
+    <% previous_task_table_values = retrive_data_for_pagination("Task", 4, 
+                                                                "previous") %>
+    <% next_task_table_values = retrive_data_for_pagination("Task", 4,
+                                                             "next") %>
 
     <div id = 'task_search_pagination'>
-      <%= button_tag "<--Previous " %>
-      <%= button_tag "Next -->", "return retrivePaginatedData(searched_values)" %>
+      <%= button_tag "<--Previous ", 
+                     id: 'previous_data_2', 
+                     class: 'btn btn-default', 
+                    onClick: "return retrivePaginatedDataoFPrevious(#{previous_task_table_values}, 
+                                                                    #{next_task_table_values}, 
+                                                                    'task_search_table_details', 
+                                                                    '2', #{table_counts});" %>
+      <%= button_tag "Next -->", 
+                     id: 'next_data_2',
+                     class: 'btn btn-default',
+                     onClick: "return retrivePaginatedDataoFNext(#{next_task_table_values},
+                                                                 #{previous_task_table_values}, 'task_search_table_details', 
+                                                                    '2', #{table_counts});" %>
     </div>
     <br>
     
@@ -114,11 +146,24 @@
     </table>
 
     <br>
-    <% searched_values = retrive_data_for_pagination("User", 4).flatten %>
+    <% previous_user_table_values = retrive_data_for_pagination("User", 4, 
+                                                                "previous") %>
+    <% next_user_table_values = retrive_data_for_pagination("User", 4, 
+                                                            "next") %>
 
     <div id = 'user_search_pagination'>
-      <%= button_tag "<--Previous " %>
-      <%= button_tag "Next -->", "return retrivePaginatedData(searched_values)" %>
+      <%= button_tag "<--Previous ", 
+                     id: 'previous_data_3', 
+                     class: 'btn btn-default', 
+                     onClick: "return retrivePaginatedDataoFPrevious(#{previous_user_table_values},
+                                                                     #{next_user_table_values}, 
+                                                                     'user_search_table_details', 
+                                                                     '3', #{table_counts});" %>
+      <%= button_tag "Next -->", id: 'next_data_3', 
+                                 class: 'btn btn-default', 
+                                 onClick: "return retrivePaginatedDataoFNext(#{next_user_table_values}, 
+                                                                             #{previous_task_table_values}, 'user_search_table_details', 
+                                                                               '3', #{table_counts});" %>
     </div>
 
     <br>

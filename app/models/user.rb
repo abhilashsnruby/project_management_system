@@ -13,7 +13,7 @@ class User < ApplicationRecord
   scope :find_all_moderators, -> { joins(:roles).where("roles.name = ?", 'moderator' ) }
 
   # before_save :check_super_user_exists?, User.User.where(user_name: super_user).present?
-
+  
   def self.retrive_complete_user_details
     @users = User.all
     @employees = Employee.all

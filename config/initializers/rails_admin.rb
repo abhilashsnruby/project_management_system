@@ -5,6 +5,12 @@ RailsAdmin.config do |config|
   end
   ### Popular gems integration
 
+  config.navigation_static_links = {
+    'Google' => 'http://www.google.com'
+  }
+
+  # config.excluded_models << "User"
+
   config.model ProjectOwner do
     list do
       field :id do
@@ -72,10 +78,10 @@ RailsAdmin.config do |config|
 
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
-  # config.show_gravatar = true
+  config.show_gravatar = false
 
   config.actions do
-    dashboard                     # mandatory
+    dashboard
     index                         # mandatory
     new
     export

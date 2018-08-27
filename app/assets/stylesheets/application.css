@@ -214,10 +214,24 @@
     color: white;
 }
 
-
-
 .project_search_projects_pagination {
   color: red;
+}
+
+
+
+.squares {
+  position: aboslute; 
+  width: 300px; 
+}
+
+.square {
+  text-align: center;
+  margin: 0px;
+  background-color: red;
+  width:100px;
+  height:100px; 
+  float: left;
 }
 
 

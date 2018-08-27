@@ -1,0 +1,19 @@
+<ul class="nav navbar-nav navbar-right root_links">
+  <% actions(:root).each do |action| %>
+    <li class="<%= action.action_name %>_root_link">
+      <%= link_to wording_for(:menu, action), { action: action.action_name, controller: 'rails_admin/main' }, class: action.pjax? ? "pjax" : "" %>
+    </li>
+  <% end %>
+  <% if _current_user %>
+    <% if user_link = edit_user_link %>
+      <li class="edit_user_root_link">
+        <%= user_link %>
+      </li>
+    <% end %>
+    <% if logout_path.present? %>
+      <li>
+        <%= link_to content_tag('span', t('admin.misc.log_out'), class: 'label label-danger'), logout_path, method: logout_method %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

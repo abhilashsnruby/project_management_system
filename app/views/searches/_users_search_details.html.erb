@@ -1,98 +1,127 @@
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type = 'text/javascript'>
+    
+    $(document).ready(function() {
+      $("#previous_data_3").hide();
+      $("#previous_data_4").hide();
+    });
+  </script>
+
 <div id = 'users_search_details'>
 
-  <% array = ['user', 'employee', 'project'] %>
+  <% if @users.present? %>
+    <br/>
+    <table border = '1', id = "user_search_table_details">
+      <thead>
+        <tr>
+          <th> User Name </th>
+          <th> Email </th>
+          <th> Employee </th>
+        </tr>
+      </thead>
 
-  <% if array.count == 3 %>
-    <% if @users.present? %>
-      <br/>
-      <table border = '1', id = 'users_table_details'>
-        <thead>
-          <tr>
-            <th> User Name </th>
-            <th> Email </th>
-            <th> Employee </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @users.each do |user| %>
+      <tbody>
+        <% @users.each_with_index do |user, index| %>
+          <% if index <= 3 %>
             <tr>
               <td><%= user.user_name %></td>
               <td><%= user.email %></td>
-              <td><%= user.employee_id %></td>
+              <td><%= user.employee.present? ? Employee.find(user.employee.id).empname : "" %></td>
             </tr>
           <% end %>
-        </tbody>
-      </table>
+        <% end %>
+      </tbody>
+    </table>
 
-    <% else %>
-      
-      <h5 style = "color:red"> </h5>
+    <% table_counts = remaining_table_value_count %>
 
-    <% end %>
+    <br>
+    <% previous_user_table_values = retrive_data_for_pagination("User", 4, 
+                                                                "previous") %>
+    <% next_user_table_values = retrive_data_for_pagination("User", 4, 
+                                                            "next") %>
+
+    <div id = 'user_search_pagination'>
+      <%= button_tag "<--Previous ",
+                     id: 'previous_data_3',
+                     class: 'btn btn-default',
+                     onClick: "return retrivePaginatedDataoFPrevious(#{previous_user_table_values},
+                                                                     #{next_user_table_values},
+                                                                     'user_search_table_details',
+                                                                     '3', #{table_counts});" %>
+
+      <%= button_tag "Next -->",
+                     id: 'next_data_3',
+                     class: 'btn btn-default',
+                     onClick: "return retrivePaginatedDataoFNext(#{next_user_table_values},
+                                                                 #{previous_user_table_values},
+                                                                 'user_search_table_details',
+                                                                 '3', #{table_counts});" %>
+    </div>
 
     <br>
 
-    <% if @employees.present? %>
-      
-      <table border = '1', id = 'employees_table_details'>
-        <thead>
-          <tr>
-            <th> Employee Name </th>
-            <th> First Name </th>
-            <th> Second Name </th>
-            <th> Middle Name </th>
-          </tr>
-        </thead>
+<% else %>
+  
+  <h5 style = "color:red"> </h5>
 
-        <tbody>
-          <% @employees.each do |employee| %>
+<% end %>
+
+<div id = 'employee_search_details'>
+
+  <% if @employees.present? %>
+    <br/>  
+    <table border = '1', id = 'employee_details_search_table_data'>
+      <thead>
+        <tr>
+          <th> Employee Name </th>
+          <th> First Name </th>
+          <th> Second Name </th>
+          <th> Middle Name </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @employees.each_with_index do |employee, index| %>
+          <% if index <= 3 %>
             <tr>
-              <td><%= link_to employee.empname, employee %></td>
+              <td><%= employee.empname %></td>
               <td><%= employee.first_name %></td>
               <td><%= employee.second_name %></td>
               <td><%= employee.middle_name %></td>
             </tr>
           <% end %>
-        </tbody>
-      </table>
+        <% end %>
+      </tbody>
+    </table>
 
-    <% else %>
-      
-      <h5 style = "color:red"> </h5>
+  <br>
+    <% previous_employee_table_values = retrive_data_for_pagination("Employee", 4,
+                                                                    "previous") %>
+    <% next_employee_table_values = retrive_data_for_pagination("Employee", 4,
+                                                                "next") %>
 
-    <% end %>
+    <div id = 'employee_search_pagination'>
+      <%= button_tag "<--Previous ",
+                     id: 'previous_data_4',
+                     class: 'btn btn-default',
+                     onClick: "return retrivePaginatedDataoFPrevious(#{previous_employee_table_values},
+                                                                     #{next_employee_table_values},
+                                                                     'employee_details_search_table_data',
+                                                                     '4', #{table_counts});" %>
+      <%= button_tag "Next -->",
+                     id: 'next_data_4',
+                     class: 'btn btn-default',
+                     onClick: "return retrivePaginatedDataoFNext(#{next_employee_table_values},
+                                                                 #{previous_employee_table_values},
+                                                                 'employee_details_search_table_data',
+                                                                 '4', #{table_counts});" %>
+    </div>
 
     <br>
 
-    <% if @projects.present? %>
-      
-      <table border = '1', id = 'projects_table_details'>
-        <thead>
-          <tr>
-            <th> Project Title </th>
-            <th> Description </th>
-            <th> Category Name </th>
-          </tr>
-        </thead>
+  <% else %>
+    
+    <h5 style = "color:red"> </h5>
 
-        <tbody>
-          <% @projects.each do |project| %>
-            <tr>
-              <td><%= project.title %></td>
-              <td><%= project.description %></td>
-              <td><%= project.category_name %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-
-    <% else %>
-      
-      <h5 style = "color:red"> </h5>
-
-    <% end %>
-       <%= link_to 'Dashboard', dashboard_index_path %> </br>
-    <br>
   <% end %>
-</div>
