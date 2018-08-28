@@ -1,21 +1,102 @@
-<h1>Dashboard#index</h1>
+<br/>
+<br/>
+<br/>
 
-<div class = 'dashboard'>
-  <table>
-    <tr>
-      <td> <%= link_to "#{user_name_detail(@user_name)}'s projects", projects_path %> <%= user_projects(@user_projects) %> </td>
-      <td> </td>
-      <td> </td>
-      <td> <%= link_to "Assign Tasks", assign_tasks_projects_path %> </td>
-      <td> <%= link_to "Comment Tasks", display_task_details_tasks_path %> </td>
-      <td> <%= link_to "Project Tasks", project_tasks_projects_path %> </td>
-      <td> <%= link_to "Assign projects(users)", assign_projects_to_users_projects_path %> </td>
-      <td> <%= link_to "Show user projects", view_user_project_details_projects_path %> </td>
-      <td> <%= link_to "Add project owners", project_owners_path %> </td>
-      <td> <%= link_to "Assign projects(project owners)", assign_projects_to_project_owner_project_owners_path %> </td>
-      <td> <%= link_to "View Employees", employees_path %> </td>
-      <td> <%= link_to "search projects", search_projects_data_searches_path %> </td>
-      <td> <%= link_to "Record logs", record_logs_path %> </td>
-    </tr>
-  </table>
+<br/>
+
+<div class = 'container'>
+  
+  <div class="row">
+    <table>
+      <tr>
+        <td>
+          <div class="div1"> <%= link_to "#{user_name_detail(@user_name)}'s projects", projects_path %> <%= user_projects(@user_projects) %> </div>
+        </td>
+
+       <% 7.times do %>
+          <td> </td>
+        <% end %>
+
+        <td>
+          <div class="div2"> <%= link_to "Assign Tasks", assign_tasks_projects_path %> </div>
+        </td>
+
+        <% 7.times do %>
+          <td> </td>
+        <% end %>
+        
+        <td>
+          <div class="div3">  <%= link_to "Comment Tasks", display_task_details_tasks_path %> </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br/>
+
+  <% 7.times do %>
+    <table>
+      <tr>
+        <td> </td>
+      </tr>
+    </table>
+  <% end %>
+
+  <div class="row">
+    <table>
+      <tr>
+        <td>
+          <div class="div1"> <%= link_to "Add project owners", project_owners_path %> </div>
+        </td>
+
+         <% 7.times do %>
+           <td> </td>
+         <% end %>
+
+        <td>
+          <div class="div2"> <%= link_to "Assign projects(project owners)",assign_projects_to_project_owner_project_owners_path %> </div>
+        </td>
+
+         <% 7.times do %>
+           <td> </td>
+         <% end %>
+
+        <td>
+          <div class="div3"> <%= link_to "View Employees", employees_path %> </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br/>
+
+  <% 7.times do %>
+    <table>
+      <tr>
+        <td> </td>
+      </tr>
+    </table>
+  <% end %>
+
+  <div class="row">
+    <table>
+      <tr>
+        <td>
+          <div class="div1"> <%= link_to "search projects", search_projects_data_searches_path %> </div>
+        </td>
+
+        <% 7.times do %>
+           <td> </td>
+         <% end %>
+
+        <td>
+          <div class="div2"> <%= link_to "Record logs", record_logs_path %> </div>
+        </td>
+
+        <% 7.times do %>
+           <td> </td>
+         <% end %>
+
+      </tr>
+    </table>
+  </div>
+
 </div>

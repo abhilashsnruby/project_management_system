@@ -153,8 +153,8 @@
             $("#next_data_3").show();
             $("#previous_data_3").hide();
         case 'employee_details_search_table_data':
-            $("#next_data_4").hide();
-            $("#previous_data_4").show();
+            $("#next_data_4").show();
+            $("#previous_data_4").hide();
             break;
         default:
             console.log('Button didnot change');
@@ -178,11 +178,11 @@
       return (table_id == 'employee_details_search_table_data')
     }
 
-    function table_ternary_condition(table_identifier,
-                                     method_name) {
+    function table_ternary_condition(table_identifier,method_name) {
+              debugger;
+
       if ( (method_name == 'disable_next_button') || 
            (method_name == 'disable_previous_button') ) {
-        debugger;
         return table_indentifier(table_identifier);
       }
       else if (method_name == '') {
@@ -191,6 +191,7 @@
     }
 
     function table_indentifier(table_identifier){
+
       return ( (table_identifier == '1') ?
               'project_search_table_details' :
               ( (table_identifier == '2') ?
@@ -201,7 +202,7 @@
     }
 
     function deleteTableRows(table_id, table_row_count,
-                             next_or_previous_table_row_count, table_counts, 
+                             next_or_previous_table_row_count, table_counts,
                              pagination_tag_name) {
 
       var tableHeaderRowCount = 1;
