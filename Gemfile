@@ -7,6 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 gem 'rails', '~> 5.1.6'
 gem 'carrierwave'
 gem 'cancancan', '~> 2.0'

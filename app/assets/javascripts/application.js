@@ -12,245 +12,244 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require dataTables/jquery.dataTables
 //= require_tree
 
-    function retrivePaginatedDataoFPrevious(table_rows, next_table_rows, 
-                                        id, table_identifier, table_counts) {
-      
-      disable_previous_button(table_identifier);
+function retrivePaginatedDataoFPrevious(table_rows, next_table_rows, 
+                                    id, table_identifier, table_counts) {
+  
+  disable_previous_button(table_identifier);
 
-      var table_data = document.getElementById(id);
-      var table_row_count = table_rows.length;
-      var next_table_rows_count = next_table_rows.length;
-      var markup;
-      
-      table_id = table_ternary_condition(table_identifier, '');
+  var table_data = document.getElementById(id);
+  var table_row_count = table_rows.length;
+  var next_table_rows_count = next_table_rows.length;
+  var markup;
+  
+  table_id = table_ternary_condition(table_identifier, '');
 
-      status = deleteTableRows(table_id, table_row_count, 
-                               next_table_rows_count, 
-                               table_counts, 'previous');
+  status = deleteTableRows(table_id, table_row_count, 
+                           next_table_rows_count, 
+                           table_counts, 'previous');
 
-      if (status) {
-        if (id == table_id) {
-          for (var i = 0; i <= table_row_count - 1; i++) {
-            condition1 = checkTableCondition1();
-            condition2 = checkTableCondition2();
-            condition3 = checkTableCondition3();
-            
-            if (condition1) {
-              markup = "<tr> <td>" + table_rows[i][0] +
-                       "</td><td>" + table_rows[i][1] +
-                       "</td><td>"  + table_rows[i][2] +
-                       "</td></tr>" ;
-            }
-            else if (condition2) {
-              markup = "<tr> <td>" + table_rows[i][0] +
-                       "</td><td>" + table_rows[i][1] +
-                       "</td></tr>" ;
-            }
-            else if (condition3) {
-              markup = "<tr> <td>" + table_rows[i][0] +
-                       "</td><td>" + table_rows[i][1] +
-                        "</td><td>" + table_rows[i][2] +
-                       "</td><td>" + table_rows[i][3] +
-                       "</td></tr>" ;
-            }
-            $(table_data).append(markup);
-          }
+  if (status) {
+    if (id == table_id) {
+      for (var i = 0; i <= table_row_count - 1; i++) {
+        condition1 = checkTableCondition1();
+        condition2 = checkTableCondition2();
+        condition3 = checkTableCondition3();
+        
+        if (condition1) {
+          markup = "<tr> <td>" + table_rows[i][0] +
+                   "</td><td>" + table_rows[i][1] +
+                   "</td><td>"  + table_rows[i][2] +
+                   "</td></tr>" ;
         }
-      }
-    }
-
-    function retrivePaginatedDataoFNext(next_table_rows, previous_table_rows, 
-                                        id, table_identifier,
-                                        table_counts) {
-
-      disable_next_button(table_identifier);
-
-      var table_data = document.getElementById(id);
-      var table_row_count = next_table_rows.length;
-      var previous_table_row_count = previous_table_rows.length;
-      var markup;
-
-      table_id = table_ternary_condition(table_identifier, '');
-
-      status = deleteTableRows(table_id, table_row_count, 
-                               previous_table_row_count, table_counts, 
-                               'next');
-      
-      if (status) {
-        if (id == table_id) {
-          for (var i = 0; i <= table_row_count - 1; i++) {
-            condition1 = checkTableCondition1();
-            condition2 = checkTableCondition2();
-            condition3 = checkTableCondition3();
-            
-            if (condition1) {
-              markup = "<tr> <td>" + next_table_rows[i][0] + 
-                       "</td><td>" + next_table_rows[i][1] + 
-                       "</td><td>"  + next_table_rows[i][2] +
-                       "</td></tr>" ;
-            }
-            else if (condition2) {
-              markup = "<tr> <td>" + next_table_rows[i][0] + 
-                       "</td><td>" + next_table_rows[i][1] +  
-                       "</td></tr>" ;
-            }
-            else if (condition3) {
-              markup = "<tr> <td>" +  next_table_rows[i][0] +
-                       "</td><td>" + next_table_rows[i][1] +
-                        "</td><td>" + next_table_rows[i][2] +
-                       "</td><td>" + next_table_rows[i][3] +
-                       "</td></tr>" ;
-            }
-            $(table_data).append(markup);
-          }
+        else if (condition2) {
+          markup = "<tr> <td>" + table_rows[i][0] +
+                   "</td><td>" + table_rows[i][1] +
+                   "</td></tr>" ;
         }
+        else if (condition3) {
+          markup = "<tr> <td>" + table_rows[i][0] +
+                   "</td><td>" + table_rows[i][1] +
+                    "</td><td>" + table_rows[i][2] +
+                   "</td><td>" + table_rows[i][3] +
+                   "</td></tr>" ;
+        }
+        $(table_data).append(markup);
       }
     }
+  }
+}
 
-    function disable_next_button(table_identifier) {
-      var table_id = table_ternary_condition(table_identifier,
-                                          'disable_next_button');
+function retrivePaginatedDataoFNext(next_table_rows, previous_table_rows, 
+                                    id, table_identifier,
+                                    table_counts) {
 
-      switch(table_id) {
-        case 'project_search_table_details':
-            $("#next_data_1").hide();
-            $("#previous_data_1").show();
-            break;
-        case 'task_search_table_details':
-            $("#next_data_2").hide();
-            $("#previous_data_2").show();
-            break;
-        case 'user_search_table_details':
-            $("#next_data_3").hide();
-            $("#previous_data_3").show();
-            break;
-        case 'employee_details_search_table_data':
-            $("#next_data_4").hide();
-            $("#previous_data_4").show();
-            break;
-        default:
-            console.log('Button did not change');
+  disable_next_button(table_identifier);
+
+  var table_data = document.getElementById(id);
+  var table_row_count = next_table_rows.length;
+  var previous_table_row_count = previous_table_rows.length;
+  var markup;
+
+  table_id = table_ternary_condition(table_identifier, '');
+
+  status = deleteTableRows(table_id, table_row_count, 
+                           previous_table_row_count, table_counts, 
+                           'next');
+  
+  if (status) {
+    if (id == table_id) {
+      for (var i = 0; i <= table_row_count - 1; i++) {
+        condition1 = checkTableCondition1();
+        condition2 = checkTableCondition2();
+        condition3 = checkTableCondition3();
+        
+        if (condition1) {
+          markup = "<tr> <td>" + next_table_rows[i][0] + 
+                   "</td><td>" + next_table_rows[i][1] + 
+                   "</td><td>"  + next_table_rows[i][2] +
+                   "</td></tr>" ;
+        }
+        else if (condition2) {
+          markup = "<tr> <td>" + next_table_rows[i][0] + 
+                   "</td><td>" + next_table_rows[i][1] +  
+                   "</td></tr>" ;
+        }
+        else if (condition3) {
+          markup = "<tr> <td>" +  next_table_rows[i][0] +
+                   "</td><td>" + next_table_rows[i][1] +
+                    "</td><td>" + next_table_rows[i][2] +
+                   "</td><td>" + next_table_rows[i][3] +
+                   "</td></tr>" ;
+        }
+        $(table_data).append(markup);
       }
     }
+  }
+}
 
-    function disable_previous_button(table_identifier) {
-      var table_id = table_ternary_condition(table_identifier, 
-                                          'disable_previous_button');
+function disable_next_button(table_identifier) {
+  var table_id = table_ternary_condition(table_identifier,
+                                      'disable_next_button');
 
-      switch(table_id) {
-        case 'project_search_table_details':
-            $("#next_data_1").show();
-            $("#previous_data_1").hide();
-            break;
-        case 'task_search_table_details':
-            $("#next_data_2").show();
-            $("#previous_data_2").hide();
-            break;
-        case 'user_search_table_details':
-            $("#next_data_3").show();
-            $("#previous_data_3").hide();
-        case 'employee_details_search_table_data':
-            $("#next_data_4").show();
-            $("#previous_data_4").hide();
-            break;
-        default:
-            console.log('Button didnot change');
-      }
-    }
+  switch(table_id) {
+    case 'project_search_table_details':
+        $("#next_data_1").hide();
+        $("#previous_data_1").show();
+        break;
+    case 'task_search_table_details':
+        $("#next_data_2").hide();
+        $("#previous_data_2").show();
+        break;
+    case 'user_search_table_details':
+        $("#next_data_3").hide();
+        $("#previous_data_3").show();
+        break;
+    case 'employee_details_search_table_data':
+        $("#next_data_4").hide();
+        $("#previous_data_4").show();
+        break;
+    default:
+        console.log('Button did not change');
+  }
+}
 
-    function checkTableCondition1() {
+function disable_previous_button(table_identifier) {
+  var table_id = table_ternary_condition(table_identifier, 
+                                      'disable_previous_button');
 
-      return ( (table_id == 'project_search_table_details') ||
-        (table_id ==  'user_search_table_details')
-      )
-    }
+  switch(table_id) {
+    case 'project_search_table_details':
+        $("#next_data_1").show();
+        $("#previous_data_1").hide();
+        break;
+    case 'task_search_table_details':
+        $("#next_data_2").show();
+        $("#previous_data_2").hide();
+        break;
+    case 'user_search_table_details':
+        $("#next_data_3").show();
+        $("#previous_data_3").hide();
+    case 'employee_details_search_table_data':
+        $("#next_data_4").show();
+        $("#previous_data_4").hide();
+        break;
+    default:
+        console.log('Button didnot change');
+  }
+}
 
-    function checkTableCondition2() {
+function checkTableCondition1() {
 
-      return (table_id == 'task_search_table_details')
-    }
+  return ( (table_id == 'project_search_table_details') ||
+    (table_id ==  'user_search_table_details')
+  )
+}
 
-    function checkTableCondition3() {
+function checkTableCondition2() {
 
-      return (table_id == 'employee_details_search_table_data')
-    }
+  return (table_id == 'task_search_table_details')
+}
 
-    function table_ternary_condition(table_identifier,method_name) {
-              debugger;
+function checkTableCondition3() {
 
-      if ( (method_name == 'disable_next_button') || 
-           (method_name == 'disable_previous_button') ) {
-        return table_indentifier(table_identifier);
-      }
-      else if (method_name == '') {
-        return table_indentifier(table_identifier);
-      }
-    }
+  return (table_id == 'employee_details_search_table_data')
+}
 
-    function table_indentifier(table_identifier){
+function table_ternary_condition(table_identifier,method_name) {
+          debugger;
 
-      return ( (table_identifier == '1') ?
-              'project_search_table_details' :
-              ( (table_identifier == '2') ?
-              'task_search_table_details' :
-              ((table_identifier == '3') ?
-              'user_search_table_details' :
-              'employee_details_search_table_data')) )
-    }
+  if ( (method_name == 'disable_next_button') || 
+       (method_name == 'disable_previous_button') ) {
+    return table_indentifier(table_identifier);
+  }
+  else if (method_name == '') {
+    return table_indentifier(table_identifier);
+  }
+}
 
-    function deleteTableRows(table_id, table_row_count,
-                             next_or_previous_table_row_count, table_counts,
-                             pagination_tag_name) {
+function table_indentifier(table_identifier){
 
-      var tableHeaderRowCount = 1;
-      var table = document.getElementById(table_id);
-      var row_condition;
+  return ( (table_identifier == '1') ?
+          'project_search_table_details' :
+          ( (table_identifier == '2') ?
+          'task_search_table_details' :
+          ((table_identifier == '3') ?
+          'user_search_table_details' :
+          'employee_details_search_table_data')) )
+}
 
-      conditon = row_conditon(table_id, 
-                              next_or_previous_table_row_count,
-                              pagination_tag_name);
-      
-      for (var i = tableHeaderRowCount; i <= conditon; i++) {
-        table.deleteRow(tableHeaderRowCount);
-      }
-      return true;
-    }
+function deleteTableRows(table_id, table_row_count,
+                         next_or_previous_table_row_count, table_counts,
+                         pagination_tag_name) {
 
-    function return_row_conditon_value(pagination_tag_name,
-                                       next_or_previous_table_row_count) {
+  var tableHeaderRowCount = 1;
+  var table = document.getElementById(table_id);
+  var row_condition;
 
-      if (pagination_tag_name == 'previous') {
-        return (next_or_previous_table_row_count);
-      }
-      else if (pagination_tag_name == 'next') {
-        return (next_or_previous_table_row_count);
-      }
-    }
+  conditon = row_conditon(table_id, 
+                          next_or_previous_table_row_count,
+                          pagination_tag_name);
+  
+  for (var i = tableHeaderRowCount; i <= conditon; i++) {
+    table.deleteRow(tableHeaderRowCount);
+  }
+  return true;
+}
 
-    function row_conditon(table_id, next_or_previous_table_row_count,
-                          pagination_tag_name) {
+function return_row_conditon_value(pagination_tag_name,
+                                   next_or_previous_table_row_count) {
 
-      switch(table_id) {
-        case 'project_search_table_details':
-          return (return_row_conditon_value(pagination_tag_name,
-                                    next_or_previous_table_row_count))
-          break;
-        case 'task_search_table_details':
-          return (return_row_conditon_value(pagination_tag_name,
-                                    next_or_previous_table_row_count))
-          break;
-        case 'user_search_table_details':
-          return (return_row_conditon_value(pagination_tag_name,
-                                    next_or_previous_table_row_count))
-          break;
-        case 'employee_details_search_table_data':
-          return (return_row_conditon_value(pagination_tag_name,
-                                    next_or_previous_table_row_count))
-          break;
-        default:
-          console.log("could'nt find row condition");
-     }
-    }
+  if (pagination_tag_name == 'previous') {
+    return (next_or_previous_table_row_count);
+  }
+  else if (pagination_tag_name == 'next') {
+    return (next_or_previous_table_row_count);
+  }
+}
+
+function row_conditon(table_id, next_or_previous_table_row_count,
+                      pagination_tag_name) {
+
+  switch(table_id) {
+    case 'project_search_table_details':
+      return (return_row_conditon_value(pagination_tag_name,
+                                next_or_previous_table_row_count))
+      break;
+    case 'task_search_table_details':
+      return (return_row_conditon_value(pagination_tag_name,
+                                next_or_previous_table_row_count))
+      break;
+    case 'user_search_table_details':
+      return (return_row_conditon_value(pagination_tag_name,
+                                next_or_previous_table_row_count))
+      break;
+    case 'employee_details_search_table_data':
+      return (return_row_conditon_value(pagination_tag_name,
+                                next_or_previous_table_row_count))
+      break;
+    default:
+      console.log("could'nt find row condition");
+ }
+}

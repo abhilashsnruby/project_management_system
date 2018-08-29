@@ -1,34 +1,45 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p>
+ -->
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type = 'text/javascript'>
+    
+    
+  </script>
 
-<h1>Project Owners</h1>
+<br/>
+<br/>
+<br/>
+<center>
+  <h1>Project Owners</h1>
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>Project owner name</th>
-      <th>Qualification</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @project_owners.each do |project_owner| %>
+  <table border="1", id: "project_owner_details">
+    <thead>
       <tr>
-        <td><%= project_owner.project_owner_name %></td>
-        <td><%= project_owner.qualification %></td>
-        <td><%= project_owner.user_id %></td>
-        <td><%= link_to 'Show', project_owner %></td>
-        <td><%= link_to 'Edit', edit_project_owner_path(project_owner) %></td>
-        <td><%= link_to 'Destroy', project_owner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Project owner name</th>
+        <th>Qualification</th>
+        <th>User</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @project_owners.each do |project_owner| %>
+        <tr>
+          <td><%= project_owner.project_owner_name %></td>
+          <td><%= project_owner.qualification %></td>
+          <td><%= project_owner.user_id %></td>
+          <td><%= link_to 'Show', project_owner %></td>
+          <td><%= link_to 'Edit', edit_project_owner_path(project_owner) %></td>
+          <td><%= link_to 'Destroy', project_owner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Project Owner', new_project_owner_path %></br>
+  <br>
+
+  <%= link_to 'New Project Owner', new_project_owner_path %></br>
 
 
-<%= link_to 'Dashboard', dashboard_index_path %> </br>
+  <%= link_to 'Dashboard', dashboard_index_path %> </br>
+</center>
