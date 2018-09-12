@@ -14,6 +14,11 @@
  *= require_self
  */
 
+ .digg_pagination {
+    position:absolute;  
+    right: 0px;
+ }
+
  #show_message,.alert {position:relative;}
  .clear{clear:both}
 

@@ -22,6 +22,13 @@
   </tbody>
 </table>
 
+<div class="digg_pagination">
+  <div class="page_info">
+    <%= page_entries_info @employees %>
+  </div>
+    <%= will_paginate @employees, :container => false %>
+</div>
+
 <br>
 
 <%= link_to 'New Employee', new_employee_path %> </br>

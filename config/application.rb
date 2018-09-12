@@ -4,6 +4,7 @@ require 'rails/all'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 require 'csv'
+require 'will_paginate'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

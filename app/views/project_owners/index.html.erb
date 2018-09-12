@@ -2,44 +2,77 @@
  -->
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script type = 'text/javascript'>
-    
-    
-  </script>
+   $(document).ready(function () {
+     $('#project_owner_details').DataTable();
+   });
+</script>
 
 <br/>
 <br/>
 <br/>
-<center>
-  <h1>Project Owners</h1>
+<div class="container">
+  
+  <div class="row">
+    <h1>Project Owners</h1>
+  </div>
+   
+   <div class="row">
 
-  <table border="1", id: "project_owner_details">
-    <thead>
-      <tr>
-        <th>Project owner name</th>
-        <th>Qualification</th>
-        <th>User</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+     <div class="col-md-12">
+       <table border="1", id: "project_owner_details",
+                          class="table table-striped table-bordered nowrap",
+                          style="width:100%">
+         <thead>
+           <tr>
+             <th class="th-sm">Project owner name</th>
+             <th>Qualification</th>
+             <th>User</th>
+             <th colspan="3"></th>
+           </tr>
+         </thead>
 
-    <tbody>
-      <% @project_owners.each do |project_owner| %>
-        <tr>
-          <td><%= project_owner.project_owner_name %></td>
-          <td><%= project_owner.qualification %></td>
-          <td><%= project_owner.user_id %></td>
-          <td><%= link_to 'Show', project_owner %></td>
-          <td><%= link_to 'Edit', edit_project_owner_path(project_owner) %></td>
-          <td><%= link_to 'Destroy', project_owner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+         <tbody>
+           <% @project_owners.each do |project_owner| %>
+             <tr>
+               <td><%= project_owner.project_owner_name %></td>
+               <td><%= project_owner.qualification %></td>
+               <td><%= project_owner.user_id %></td>
+               <td><%= link_to '<i class="glyphicon glyphicon-edit"></i>'.html_safe, 
+                                                                          project_owner %>
+               </td>
+               <td><%= link_to '<i class="glyphicon glyphicon-eye-open"></i>'.html_safe,
+                                                                             edit_project_owner_path(project_owner)%>
+               </td>
+               <td><%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, 
+                                                                          project_owner, 
+                                                                          method: :delete, 
+                                                                          data: { confirm: 'Are you sure?' } %>
+               </td>
+             </tr>
+           <% end %>
+         </tbody>
+       </table>
+      
+    <div class="digg_pagination">
+      <div class="page_info">
+        <%= page_entries_info @project_owners %>
+      </div>
 
+      <div class="page_info" style="color:blue">
+        <%= will_paginate(@project_owners, :container => false, class: 'pagination-lg') %>
+      </div>
+    </div>
+  
   <br>
+  <br>
+  <br>
+  
+  <%= button_to('New Project Owner', new_project_owner_path, 
+                :method => :get, class: 'btn btn-large btn-danger') %>
+  </br>
 
-  <%= link_to 'New Project Owner', new_project_owner_path %></br>
-
-
-  <%= link_to 'Dashboard', dashboard_index_path %> </br>
-</center>
+  <%= link_to 'Dashboard', dashboard_index_path %> 
+  </br>
+  </div>
+  </div>
+</div>

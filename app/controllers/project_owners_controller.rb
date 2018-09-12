@@ -1,13 +1,21 @@
 class ProjectOwnersController < ApplicationController
   before_action :set_project_owner, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource except: [:assign_projects_to_project_owner]
+  load_and_authorize_resource except: [:assign_projects_to_project_owner, :find_paginated_data]
 
   # GET /project_owners
   # GET /project_owners.json
   def index
-    @project_owners = ProjectOwner.all
+    @project_owners = ProjectOwner.paginate(:page => params[:page])
+                                  .per_page(5)
   end
 
+  def find_paginated_data
+    if params[:search]
+      ProjectOwner.search(params)
+    else
+      render 'find_paginated_data'
+    end
+  end
   # GET /project_owners/1
   # GET /project_owners/1.json
   def show

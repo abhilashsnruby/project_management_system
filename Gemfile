@@ -7,9 +7,9 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 gem 'rails', '~> 5.1.6'
 gem 'carrierwave'
+gem 'will_paginate', '~> 3.1.0'
 gem 'cancancan', '~> 2.0'
 gem 'rolify'
 # Use sqlite3 as the database for Active Record

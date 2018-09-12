@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   
   resources :project_owners do
     get 'assign_projects_to_project_owner', on: :collection
+    get 'find_paginated_data', on: :collection
   end
 
   resources :tasks do
