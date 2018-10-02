@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :colleges
+  resources :colleges do
+    member do
+      get 'delete_3rd_record'
+    end
+  end
+
   resources :searches do
     get 'search_projects_data', on: :collection
     get 'show_data', on: :collection

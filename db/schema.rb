@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180805054324) do
+ActiveRecord::Schema.define(version: 20181002085129) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 20180805054324) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "colleges", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "country"
+    t.string "state"
+    t.string "email"
+    t.string "full_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string "comment_name"
     t.string "comment_text"
@@ -51,6 +62,12 @@ ActiveRecord::Schema.define(version: 20180805054324) do
     t.datetime "updated_at", null: false
     t.integer "created_date_record"
     t.string "file"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "customer_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "documents", force: :cascade do |t|
@@ -68,6 +85,13 @@ ActiveRecord::Schema.define(version: 20180805054324) do
     t.string "first_name"
     t.string "second_name"
     t.string "middle_name"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "item"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "customer_id"
   end
 
   create_table "project_owners", force: :cascade do |t|
@@ -97,6 +121,12 @@ ActiveRecord::Schema.define(version: 20180805054324) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "shops", force: :cascade do |t|
+    t.string "shop_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|
